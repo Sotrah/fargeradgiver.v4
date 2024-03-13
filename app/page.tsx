@@ -1,113 +1,173 @@
-import Image from "next/image";
+"use client";
+import ColorPicker from "../components/ColorPicker";
+import RecentColorPicker from "../components/RecentColorPicker";
+import {ColorType} from "@/components/ColorType";
+import ImageGridCard from "../components/ImageGridCard";
+import React, { useState } from "react";
+import {formatHexColor} from "@/components/Utils";
+import {useSpinDelay} from "spin-delay";
+import {ScaleLoader} from "react-spinners";
+import CldImage from "../components/CldImage";
+
 
 export default function Home() {
+  // type CloudinaryResult = {
+  //   width: number;
+  //   height: number;
+  //   public_id: string;
+  // };
+
+  const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
+  const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
+  const [visibleModule, setVisibleModule] = useState("modul2");
+  const [loading, setLoading] = useState(false);
+
+  const [imageToTransform, setImageToTransform] = useState<String | null>('http://res.cloudinary.com/dj6mfsxnu/image/upload/v1707474684/jgxom27mvriax5av0prr.png');
+
+  const handleImageSelect = (selectedPicture: String) => {
+    if (selectedPicture != imageToTransform) {
+      setLoading(true);
+      setImageToTransform(selectedPicture)
+    }
+  }
+  const handleColorSelect = (selectedColor: ColorType | null) => {
+    setLoading(true);
+    setSelectedColor(selectedColor)
+  }
+
+  const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <div className="new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
+        <div className="c-site-header"> {/*Navbar opplegg*/}
+          <div className="container">
+            <div className="c-site-header__top text-white text-2xl">
+              <h1></h1>
+            </div>
+          </div>
+        </div>
+
+        <div className="main-responsive-padding px-20 mm-page mm-slideout bg-primary-100">
+          <div className="w-full">
+
+
+            <div id="__next">
+              <div id="next-app-element" className="next-content-wrapper">
+                <div className="py-8 sm:py-10 relative">
+                  <div className="top-0 absolute w-full h-[calc(100%-32px)] sm:h-[calc(100%-56px)] bg-jernia-image">
+                    <div className="relative z-10 mx-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 sm:gap-8 items-center">
+                        <div className="pt-16 sm:col-span-10 md:col-span-12">{/*Info området*/}
+                          <h1 className="text-5xl sm:text-6xl md:text-6xl font-bold">Visualiseringsverktøy</h1>
+                          <div className="mt-1 sm:mt-2 max-w-4xl">
+                            <p className="pt-6 leading-p text-xl sm:text-2xl md:3xl">
+                              La deg inspirere av Jotuns fantastiske fargeunivers.
+                              Finn fargene som passer best til din stil og last opp bilde av rommet du vil male.
+                              Etter at bildet er lastet opp kan du enkelt endre veggfargen til den fargen du ønsker.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div className="px:4 bg-primary-300 py-8 sm:py-14">
+
+            </div>
+            <div className="pt-24 flex flex-wrap justify-around items-start bg-primary-100">
+              <button
+                  className={`px-4 py-2 order-2 md:hidden ${visibleModule === "modul2" ? "bg-blue-700" : "bg-blue-500"} text-white rounded`}
+                  onClick={() => setVisibleModule("modul2")}>
+                Velg bilde
+              </button>
+              <button
+                  className={`px-4 py-2 order-2 md:hidden ${visibleModule === "modul3" ? "bg-blue-700" : "bg-blue-500"} text-white rounded`}
+                  onClick={() => setVisibleModule("modul3")}>
+                Nylig brukte farger
+              </button>
+              <button
+                  className="px-4 py-2 order-2 md:hidden bg-green-500 text-white rounded">
+                Kjøp
+              </button>
+
+
+              <div className="md:w-1/3 w-full md:order-1 order-2 px-2 pt-6 mb-4 bg-primary-300">
+                <div className={`relative pb-[100%] ${visibleModule === "modul2" ? "" : "hidden"} md:block`}>
+                  <div
+                      className={`absolute top-0 left-0 right-0 bottom-0 bg-white rounded-md shadow p-4 overflow-hidden`}>
+                    <ImageGridCard onPictureSelect={handleImageSelect}/>
+                  </div>
+                </div>
+              </div>
+
+              <div className="md:w-1/3 w-full md:order-3 order-3 px-2 pt-6 mb-4 bg-primary-300">
+                <div className={`relative pb-[100%] ${visibleModule === "modul3" ? "" : "hidden"} lg:block`}>
+                  <div
+                      className={`absolute top-0 left-0 right-0 bottom-0 bg-white rounded-lg shadow p-4 overflow-hidden`}>
+                    <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} />
+                    {/*Få inn recently used og favorites*/}
+                  </div>
+                </div>
+              </div>
+
+              <div className="md:w-1/3 w-full md:order-2 order-1 px-2 pt-6 mb-4 bg-primary-300">
+                <div className="relative pb-[100%]">
+                  <div className="absolute top-0 left-0 right-0 bottom-0 bg-white rounded-md shadow  overflow-hidden">
+                    {/* The below section is dimmed until the image is loaded */}
+                    <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full`}>
+                      {/* CldImage is documented here: https://next.cloudinary.dev/cldimage/configuration
+
+                    If there is an image and a selectedColor selected, transform it with Recolor */}
+                      {imageToTransform && selectedColor && (
+                          <CldImage
+                              placeholder="empty"
+                              onLoad={() => setLoading(false)}
+                              width='1024'
+                              height='1024'
+                              src={imageToTransform}
+                              alt="Uploaded image"
+                              className="rounded-md"
+                              sizes="100vw"
+                              recolor={['every wall and walls', formattedHex]}
+                          />
+                      )}
+                      {imageToTransform && !selectedColor && (
+                          <CldImage
+                              placeholder="empty"
+                              onLoad={() => setLoading(false)}
+                              width='1024'
+                              height='1024'
+                              src={imageToTransform}
+                              alt="Uploaded image"
+                              className="rounded-md"
+                              sizes="100vw"
+                          />
+                      )}
+                    </div>
+                  </div>
+                  <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
+                    <ScaleLoader
+                        color="#000000"
+                        speedMultiplier={0.5}
+                        loading={showSpinner}
+                    />
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} />
+          </div>
+
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+  )
+      ;
 }
+ 
