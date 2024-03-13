@@ -2,9 +2,9 @@
   {
     "fullName": "JOTUN 0288 Mexico",
     "shortName": "Mexico",
-    "code": "0288",
+    "code": "288",
     "ncsCode": "S3030-Y",
-    "hex": "#6b9eb9",
+    "hex": "#b99e6b",
     "description": "Er den grønn eller er den gul? Den er det beste av begge! Mexico har en spennende, frodig følelse, og kan gjerne brukes for å addere energi til et rom – eller gi en personlig touch til en detalj som for eksempel en inngangsdør.",
     "imageUrls": [],
     "matchingColors": null,
@@ -3541,18 +3541,6 @@
         "applicationArea": null
       }
     ]
-  },
-  {
-    "fullName": "JOTUN 0288 Mexico",
-    "shortName": "Mexico",
-    "code": "288",
-    "ncsCode": "S3030-Y",
-    "hex": "#b99e6b",
-    "description": null,
-    "imageUrls": [],
-    "matchingColors": null,
-    "shades": null,
-    "collections": []
   },
   {
     "fullName": "JOTUN 2992 Delightful Pink",

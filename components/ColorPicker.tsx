@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import colourData from './../colours_dump.json';
 import { ColorType } from "@/components/ColorType";
 
-const ColorPicker: React.FC<{ selectedColor: ColorType | null, onColorSelect: (color: ColorType | null) => void }> = ({ selectedColor, onColorSelect }) => {
+const ColorPicker: React.FC<{
+    selectedColor: ColorType | null,
+    onColorSelect: (color: ColorType | null) => void }
+> = ({ selectedColor, onColorSelect,   }) => {
     const [displayCount, setDisplayCount] = useState(16);
 
     const handleColorClick = (colorItem: ColorType) => {
