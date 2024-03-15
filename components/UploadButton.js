@@ -8,6 +8,7 @@ const UploadButton = ({ onUploadSuccess }) => {
     <CldUploadButton 
       className='bg-blue-500 hover:bg-blue-700 text-white rounded-lg w-full h-full' 
       uploadPreset="changecolor"
+      signatureEndpoint="/api/sign-cloudinary-params"
       onSuccess={(result, { widget }) => {
         console.log(result?.info);
         if (typeof result?.info === 'object' && result?.info !== null) {
