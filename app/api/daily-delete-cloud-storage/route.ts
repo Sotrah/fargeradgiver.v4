@@ -1,4 +1,3 @@
-// TEMP EXAMPLE CODE
 import { v2 as cloudinary } from "cloudinary";
  
 cloudinary.config({
@@ -7,8 +6,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const callback = (response: any) => {
-    console.log(response);
-  };
-
-cloudinary.api.ping().then(callback);
+cloudinary.api
+.resources()
+.then(result=>console.log(result));
