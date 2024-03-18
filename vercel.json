@@ -1,8 +1,8 @@
 {
     "crons": [
       {
-        "path": "/api/daily-delete-cloud-storage",
+        "path": "/app/api/daily-delete-cloud-storage",
         "schedule": "* * * * *"
       }
     ]
-  }
+}
