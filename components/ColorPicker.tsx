@@ -5,7 +5,7 @@ const ColorPicker: React.FC<{
     selectedColor: ColorType | null,
     onColorSelect: (color: ColorType | null) => void,
     colors?: ColorType[] } > = ({ selectedColor, onColorSelect, colors = [] }) => {
-    const [displayCount, setDisplayCount] = React.useState(16);
+    const [displayCount, setDisplayCount] = React.useState(200);
 
     const handleColorClick = (colorItem: ColorType) => {
         if (selectedColor && selectedColor.hex === colorItem.hex) {
@@ -21,12 +21,12 @@ const ColorPicker: React.FC<{
     };
 
     const handleShowMore = () => {
-        setDisplayCount(prevCount => prevCount + 16);
+        setDisplayCount(prevCount => prevCount + 200);
     };
 
     return (
         <>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-3 gap-4 lg:gap-2 xl:gap-4 mt-6">
                 {colors.slice(0, displayCount).map((colorItem, index) => (
                     <div key={index} className="w-full overflow-hidden rounded-lg border-2 relative hover:border-gray-500" style={{ paddingBottom: '100%' }}> {/* Sikrer 1:1 forhold */}
                         <button
@@ -42,7 +42,7 @@ const ColorPicker: React.FC<{
                             </div>
                             {/* Tekst under fargefirkanten */}
                             <div className="w-full h-1/3 flex items-center justify-center text-xs text-center" style={{ lineHeight: '1.2' }}>
-                                <span>{colorItem.code} {colorItem.shortName}</span>
+                                <span>{colorItem.code === colorItem.shortName ? colorItem.shortName : `${colorItem.code} ${colorItem.shortName}`}</span>
                             </div>
                         </button>
                     </div>
