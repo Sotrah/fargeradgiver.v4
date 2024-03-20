@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import colourData from './../colours_dump.json';
+import React from 'react';
 import { ColorType } from "@/components/ColorType";
-
+import colours_dump from "colours_dump.json"
 const ColorPicker: React.FC<{
     selectedColor: ColorType | null,
-    onColorSelect: (color: ColorType | null) => void }
-> = ({ selectedColor, onColorSelect,   }) => {
-    const [displayCount, setDisplayCount] = useState(16);
+    onColorSelect: (color: ColorType | null) => void,
+    colors?: ColorType[] } > = ({ selectedColor, onColorSelect, colors = [] }) => {
+    const [displayCount, setDisplayCount] = React.useState(16);
 
     const handleColorClick = (colorItem: ColorType) => {
         if (selectedColor && selectedColor.hex === colorItem.hex) {
@@ -28,7 +27,7 @@ const ColorPicker: React.FC<{
     return (
         <>
             <div className="grid grid-cols-4 gap-4">
-                {colourData.slice(0, displayCount).map((colorItem, index) => (
+                {colors.slice(0, displayCount).map((colorItem, index) => (
                     <div key={index} className="w-full overflow-hidden rounded-lg border-2 relative hover:border-gray-500" style={{ paddingBottom: '100%' }}> {/* Sikrer 1:1 forhold */}
                         <button
                             className={`absolute inset-0 flex flex-col items-center justify-center ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-transparent'}`}

@@ -54,7 +54,9 @@ export default function Home() {
         setSelectedColor(selectedColor)
     }
     const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
-  return (
+
+
+    return (
       <div className="new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
 
         {/*Navbar*/}
@@ -76,11 +78,11 @@ export default function Home() {
           </div>
 
             {/*Div-container til hovedelementene*/}
-            <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-4">
+            <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-4">
 
                 {/*Bildevelger*/}
               <div className="md:w-1/3 md:order-1">
-                  <div className="elements-container text-left text-xl mb-8">
+                  <div className="elements-container text-left text-xl">
                       <div className="image-grid-card">
                           <p className="md:hidden">Velg bildestil</p>
                           <ImageGridCard onPictureSelect={handleImageSelect}/>
@@ -124,7 +126,7 @@ export default function Home() {
 
                   {/*Info om valgt farge*/}
                       {selectedColor && (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '15px', justifyContent: 'space-between', marginTop: '20px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '15px'}}>
                               <div style={{ backgroundColor: `#${formattedHex}`, width: '100px', height: '100px', borderRadius: '8px',}}>
                               </div>
                               <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -178,14 +180,18 @@ export default function Home() {
                   {/*Søkebar*/}
                         <div className="flex-grow">
                   {visibleModule === "modul2" && (
-                  <Search />
+                      <div>
+                          <Search onResultsUpdate={handleResultsUpdate}/>
+                          <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}
+                                       colors={searchResults}/>
+                      </div>
                   )}
                         </div>
 
-                {/*Fargevelger*/}
-                {visibleModule === "modul2" && (
-                    <div className="color-picker flex-grow">
-                      <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                        {/*Fargevelger*/}
+                        {visibleModule === "modul2" && (
+                            <div className="color-picker flex-grow">
+                            <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
                     </div>
                 )}
 
