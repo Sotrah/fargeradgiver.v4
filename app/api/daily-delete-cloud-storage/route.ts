@@ -9,7 +9,7 @@ cloudinary.config({
 export async function GET() {
   try {
     const result = await cloudinary.api.delete_resources_by_tag('colorchangesigned')
-    .then(result=>console.log(result));
+    // .then(result=>console.log(result));
     return Response.json(result);
   } catch (error) {
       console.error('Error deleting tagged files:', error);
