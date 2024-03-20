@@ -13,11 +13,11 @@ import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
 
 export default function Home() {
-  // type CloudinaryResult = {
-  //   width: number;
-  //   height: number;
-  //   public_id: string;
-  // };
+    // type CloudinaryResult = {
+    //   width: number;
+    //   height: number;
+    //   public_id: string;
+    // };
 
   const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
   const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
@@ -57,136 +57,151 @@ export default function Home() {
 
   return (
       <div className="new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
-        <div className="c-site-header"> {/*Navbar opplegg*/}
+
+        {/*Navbar*/}
+        <div className="c-site-header">
           <div className="container">
             <div className="c-site-header__top text-white text-2xl">
-              <h1></h1>
+              <h1>Jernia</h1>
             </div>
           </div>
         </div>
 
-        <div className="main-responsive-padding px-20 mm-page mm-slideout bg-primary-100">
-          <div className="w-full">
+        {/*Overskrift og info*/}
+        <div className="container mx-auto px-4">
+          <div className="text-center my-8">
+            <h1 className="text-4xl font-bold text-gray-800">Visualiseringsverktøy</h1>
+            <p className="mt-4 text-lg text-gray-600">La deg inspirere av Jotuns fantastiske fargeunivers.
+                Finn fargene som passer best til din stil og last opp bilde av rommet du vil male.
+                Etter at bildet er lastet opp kan du enkelt endre veggfargen til den fargen du ønsker.</p>
+          </div>
 
+            {/*Div-container til hovedelementene*/}
+            <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-4">
 
-            <div id="__next">
-              <div id="next-app-element" className="next-content-wrapper">
-                <div className="py-8 sm:py-10 relative">
-                  <div className="top-0 absolute w-full h-[calc(100%-32px)] sm:h-[calc(100%-56px)] bg-jernia-image">
-                    <div className="relative z-10 mx-2">
-                      <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 sm:gap-8 items-center">
-                        <div className="pt-16 sm:col-span-10 md:col-span-12">{/*Info området*/}
-                          <h1 className="text-5xl sm:text-6xl md:text-6xl font-bold">Visualiseringsverktøy</h1>
-                          <div className="mt-1 sm:mt-2 max-w-4xl">
-                            <p className="pt-6 leading-p text-xl sm:text-2xl md:3xl">
-                              La deg inspirere av Jotuns fantastiske fargeunivers.
-                              Finn fargene som passer best til din stil og last opp bilde av rommet du vil male.
-                              Etter at bildet er lastet opp kan du enkelt endre veggfargen til den fargen du ønsker.
-                            </p>
-                          </div>
-                        </div>
+                {/*Bildevelger*/}
+              <div className="md:w-1/3 md:order-1">
+                  <div className="elements-container text-left text-xl mb-8">
+                      <div className="image-grid-card">
+                          <p className="md:hidden">Velg bildestil</p>
+                          <ImageGridCard onPictureSelect={handleImageSelect}/>
                       </div>
-                    </div>
                   </div>
-                </div>
               </div>
 
-            </div>
-            <div className="px:4 bg-primary-300 py-8 sm:py-14">
-
-            </div>
-            <div className="pt-24 flex flex-wrap justify-around items-start bg-primary-100">
-              <button
-                  className={`px-4 py-2 order-2 md:hidden ${visibleModule === "modul2" ? "bg-blue-700" : "bg-blue-500"} text-white rounded`}
-                  onClick={() => setVisibleModule("modul2")}>
-                Velg bilde
-              </button>
-              <button
-                  className={`px-4 py-2 order-2 md:hidden ${visibleModule === "modul3" ? "bg-blue-700" : "bg-blue-500"} text-white rounded`}
-                  onClick={() => setVisibleModule("modul3")}>
-                Nylig brukte farger
-              </button>
-              <button
-                  className="px-4 py-2 order-2 md:hidden bg-green-500 text-white rounded">
-                Kjøp
-              </button>
-
-
-              <div className="md:w-1/3 w-full md:order-1 order-2 px-2 pt-6 mb-4 bg-primary-300">
-                <div className={`relative pb-[100%] ${visibleModule === "modul2" ? "" : "hidden"} md:block`}>
-                  <div
-                      className={`absolute top-0 left-0 right-0 bottom-0 bg-white rounded-md shadow p-4 overflow-hidden`}>
-                    <ImageGridCard onPictureSelect={handleImageSelect}/>
-                  </div>
+                  {/*Hovedbildet*/}
+                <div className="md:w-1/3 md:order-2">
+                  {/* The below section is dimmed until the image is loaded */}
+                <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full`}>
+                  {/* CldImage is documented here: https://next.cloudinary.dev/cldimage/configuration
+                        If there is an image and a selectedColor selected, transform it with Recolor */}
+                  {imageToTransform && selectedColor && (
+                      <CldImage
+                          placeholder="empty"
+                          onLoad={() => setLoading(false)}
+                          width='1024'
+                          height='1024'
+                          src={imageToTransform}
+                          alt="Uploaded image"
+                          className="rounded-md"
+                          sizes="100vw"
+                          recolor={['every wall and walls', formattedHex]}
+                      />
+                  )}
+                  {imageToTransform && !selectedColor && (
+                      <CldImage
+                          placeholder="empty"
+                          onLoad={() => setLoading(false)}
+                          width='1024'
+                          height='1024'
+                          src={imageToTransform}
+                          alt="Uploaded image"
+                          className="rounded-md"
+                          sizes="100vw"
+                      />
+                  )}
                 </div>
-              </div>
-
-              <div className="md:w-1/3 w-full md:order-3 order-3 px-2 pt-6 mb-4 bg-primary-300">
-                <div className={`relative pb-[100%] ${visibleModule === "modul3" ? "" : "hidden"} lg:block`}>
-                  <div
-                      className={`absolute top-0 left-0 right-0 bottom-0 bg-white rounded-lg shadow p-4 overflow-hidden`}>
-                    <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} />
-                    {/*Få inn recently used og favorites*/}
-                  </div>
                 </div>
-              </div>
 
-              <div className="md:w-1/3 w-full md:order-2 order-1 px-2 pt-6 mb-4 bg-primary-300">
-                <div className="relative pb-[100%]">
-                  <div className="absolute top-0 left-0 right-0 bottom-0 bg-white rounded-md shadow  overflow-hidden">
-                    {/* The below section is dimmed until the image is loaded */}
-                    <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full`}>
-                      {/* CldImage is documented here: https://next.cloudinary.dev/cldimage/configuration
-
-                    If there is an image and a selectedColor selected, transform it with Recolor */}
-                      {imageToTransform && selectedColor && (
-                          <CldImage
-                              placeholder="empty"
-                              onLoad={() => setLoading(false)}
-                              width='1024'
-                              height='1024'
-                              src={imageToTransform}
-                              alt="Uploaded image"
-                              className="rounded-md"
-                              sizes="100vw"
-                              recolor={['every wall and walls', formattedHex]}
-                          />
+                  {/*Info om valgt farge*/}
+                      {selectedColor && (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '15px', justifyContent: 'space-between', marginTop: '20px' }}>
+                              <div style={{ backgroundColor: `#${formattedHex}`, width: '100px', height: '100px', borderRadius: '8px',}}>
+                              </div>
+                              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                  <span style={{ fontSize: '16px', fontWeight: 'bold' }}>{selectedColor.fullName}</span>
+                                  <span style={{ fontSize: '14px', fontWeight: 'bold' }}>{selectedColor.ncsCode}</span>
+                              </div>
+                              <div>
+                                  <button
+                                      className="px-10 py-2 bg-green-500 hover:bg-green-700 text-white rounded">
+                                      Kjøp
+                                  </button>
+                              </div>
+                          </div>
                       )}
-                      {imageToTransform && !selectedColor && (
-                          <CldImage
-                              placeholder="empty"
-                              onLoad={() => setLoading(false)}
-                              width='1024'
-                              height='1024'
-                              src={imageToTransform}
-                              alt="Uploaded image"
-                              className="rounded-md"
-                              sizes="100vw"
-                          />
-                      )}
-                    </div>
-                  </div>
-                  <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
-                    <ScaleLoader
-                        color="#000000"
-                        speedMultiplier={0.5}
-                        loading={showSpinner}
-                    />
-                  </div>
 
 
+
+                    {/*Siste kolonne på desktopview*/}
+                    <div className="md:w-1/3 flex flex-col md:order-3">
+                  {/*Tabs for fargevalg*/}
+                  <div className="flex-grow text-center text-lg my-4 flex justify-between">
+                      <button
+                          style={{
+                              borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
+                              fontWeight: visibleModule === "modul2" ? "bold" : "",
+                              color: visibleModule === "modul2" ? "black" : "gray"
+                          }}
+                          onClick={() => setVisibleModule("modul2")}>
+                          Finn en farge
+                      </button>
+                      <button
+                          style={{
+                              borderBottom: visibleModule === "modul3" ? "4px solid blue" : "",
+                              fontWeight: visibleModule === "modul3" ? "bold" : "",
+                        color: visibleModule === "modul3" ? "black" : "gray"
+                      }}
+                      onClick={() => setVisibleModule("modul3")}>
+                    Nylig brukt
+                  </button>
+                  <button
+                      style={{
+                        borderBottom: visibleModule === "modul4" ? "4px solid blue" : "",
+                        fontWeight: visibleModule === "modul4" ? "bold" : "",
+                        color: visibleModule === "modul4" ? "black" : "gray"
+                      }}
+                      onClick={() => setVisibleModule("modul4")}>
+                    Dine favoritter
+                  </button>
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <div>
-            <Search onResultsUpdate={handleResultsUpdate} />
-            <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} colors={searchResults} />
-          </div>
+                  {/*Søkebar*/}
+                        <div className="flex-grow">
+                  {visibleModule === "modul2" && (
+                  <Search  onResultsUpdate={handleResultsUpdate} />
+                  )}
+                        </div>
+
+                {/*Fargevelger*/}
+                {visibleModule === "modul2" && (
+                    <div className="color-picker flex-grow">
+                      <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}  colors={searchResults} />
+                    </div>
+                )}
+
+                {/*Nylig brukt*/}
+                {visibleModule === "modul3" && (
+                    <div className="recent-color-picker flex-grow">
+                      <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                    </div>
+                )}
+                    </div>
+
 
         </div>
       </div>
+    </div>
   )
       ;
 }
