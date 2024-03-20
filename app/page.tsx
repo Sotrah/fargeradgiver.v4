@@ -3,43 +3,57 @@ import ColorPicker from "../components/ColorPicker";
 import RecentColorPicker from "../components/RecentColorPicker";
 import {ColorType} from "@/components/ColorType";
 import ImageGridCard from "../components/ImageGridCard";
-import React, {useState} from "react";
-import {formatHexColor} from "@/components/Utils";
+import React, {useEffect, useState} from "react";
+import {formatHexColor, mapHitsToColorType} from "@/components/Utils";
 import {useSpinDelay} from "spin-delay";
 import {ScaleLoader} from "react-spinners";
 import CldImage from "../components/CldImage";
-import { Search } from "@/components/ColorSearch";
-
+import {Search}  from "@/components/ColorSearch";
+import colours_dump from "colours_dump.json"
+import {HitProps} from "@/components/ColorSearchHit";
 
 export default function Home() {
-  // type CloudinaryResult = {
-  //   width: number;
-  //   height: number;
-  //   public_id: string;
-  // };
+    // type CloudinaryResult = {
+    //   width: number;
+    //   height: number;
+    //   public_id: string;
+    // };
+
+    const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
+    const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
+    const [visibleModule, setVisibleModule] = useState("modul2");
+    const [loading, setLoading] = useState(false);
+    const [imageToTransform, setImageToTransform] = useState<String | null>('http://res.cloudinary.com/dj6mfsxnu/image/upload/v1707474684/jgxom27mvriax5av0prr.png');
+    const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
+    const [searchResults, setSearchResults] = useState<ColorType[]>([]);
+
+    const handleResultsUpdate = (hits: HitProps[]) => {
+        // Convert HitProps[] to ColorType[]
+        const convertedResults = mapHitsToColorType(hits);
+        if (searchResults.length !== convertedResults.length || !convertedResults.every((result, index) => result.code === searchResults[index]?.code)) {
+            setSearchResults(convertedResults); // Update state with converted results
+        }
+    };
+
+// Function to check if two arrays are equal
 
 
-  const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
-  const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
-  const [loading, setLoading] = useState(false);
-  const [visibleModule, setVisibleModule] = useState("modul2");
-  const [imageToTransform, setImageToTransform] = useState<String | null>('http://res.cloudinary.com/dj6mfsxnu/image/upload/v1707474684/jgxom27mvriax5av0prr.png');
+    useEffect(() => {
+        setColors(colours_dump);
+    }, []);
 
-
-  const handleImageSelect = (selectedPicture: String) => {
-    if (selectedPicture != imageToTransform) {
-      setLoading(true);
-      setImageToTransform(selectedPicture)
+    const handleImageSelect = (selectedPicture: String) => {
+        if (selectedPicture != imageToTransform) {
+            setLoading(true);
+            setImageToTransform(selectedPicture)
+        }
     }
-  }
-  const handleColorSelect = (selectedColor: ColorType | null) => {
-    setLoading(true);
-    setSelectedColor(selectedColor)
-  }
 
-
-  const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
-
+    const handleColorSelect = (selectedColor: ColorType | null) => {
+        setLoading(true);
+        setSelectedColor(selectedColor)
+    }
+    const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
   return (
       <div className="new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
 
@@ -109,14 +123,13 @@ export default function Home() {
                 </div>
 
                   {/*Info om valgt farge*/}
-                    <div className="md:w-1/3">
                       {selectedColor && (
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '15px', justifyContent: 'space-between', marginTop: '20px' }}>
                               <div style={{ backgroundColor: `#${formattedHex}`, width: '100px', height: '100px', borderRadius: '8px',}}>
                               </div>
-                              <div style={{ marginRight: '160px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                  <span style={{ fontSize: '18px', fontWeight: 'bold' }}>{selectedColor.fullName}</span>
-                                  <span style={{ fontSize: '16px', fontWeight: 'bold' }}>{selectedColor.ncsCode}</span>
+                              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                  <span style={{ fontSize: '16px', fontWeight: 'bold' }}>{selectedColor.fullName}</span>
+                                  <span style={{ fontSize: '14px', fontWeight: 'bold' }}>{selectedColor.ncsCode}</span>
                               </div>
                               <div>
                                   <button
@@ -126,13 +139,13 @@ export default function Home() {
                               </div>
                           </div>
                       )}
-                    </div>
+
 
 
                     {/*Siste kolonne på desktopview*/}
                     <div className="md:w-1/3 flex flex-col md:order-3">
                   {/*Tabs for fargevalg*/}
-                  <div className="flex-grow text-center text-xl my-4 flex justify-between">
+                  <div className="flex-grow text-center text-lg my-4 flex justify-between">
                       <button
                           style={{
                               borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",

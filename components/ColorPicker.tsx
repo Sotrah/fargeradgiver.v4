@@ -27,19 +27,24 @@ const ColorPicker: React.FC<{
 
     return (
         <>
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid grid-cols-4 gap-4">
                 {colourData.slice(0, displayCount).map((colorItem, index) => (
-                    <div key={index} className="w-full overflow-hidden rounded-lg border-2 relative flex flex-col items-center justify-center hover:border-gray-500">
+                    <div key={index} className="w-full overflow-hidden rounded-lg border-2 relative hover:border-gray-500" style={{ paddingBottom: '100%' }}> {/* Sikrer 1:1 forhold */}
                         <button
-                            className={`w-full flex flex-col items-center justify-center ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-transparent'}`}
-                            style={{ backgroundColor: '#F9F9F9', height: '130px'}}
+                            className={`absolute inset-0 flex flex-col items-center justify-center ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-transparent'}`}
+                            style={{ backgroundColor: '#F9F9F9' }}
                             onClick={() => handleColorClick(colorItem)}
                             aria-label={`Select ${colorItem.shortName} color`}
                         >
-                            {/* Mindre fargefirkant */}
-                            <div className="w-36 h-28 rounded-lg" style={{ backgroundColor: colorItem.hex }}></div>
+                            {/* Fargefirkant som fyller toppen av kortet */}
+                            <div className="w-full h-2/3 flex items-center justify-center" style={{ backgroundColor: colorItem.hex }}>
+                                {/* Dekorativ fargefirkant, kan justeres for å fylle en bestemt del av dette området */}
+                                <div className="w-3/4 h-3/4 rounded-lg" style={{ backgroundColor: colorItem.hex }}></div>
+                            </div>
                             {/* Tekst under fargefirkanten */}
-                            <span className="mt-2 px-1 text-sm">{colorItem.code} {colorItem.shortName}</span>
+                            <div className="w-full h-1/3 flex items-center justify-center text-xs text-center" style={{ lineHeight: '1.2' }}>
+                                <span>{colorItem.code} {colorItem.shortName}</span>
+                            </div>
                         </button>
                     </div>
                 ))}
