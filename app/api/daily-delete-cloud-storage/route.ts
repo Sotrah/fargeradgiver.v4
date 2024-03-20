@@ -16,8 +16,8 @@ function callback(result: any){
 export async function GET() {
   try {
     const result = await cloudinary.api.delete_resources_by_tag('colorchangesigned')
-    .then(callback);
-    return result;
+    callback(result);
+    return Response.json(result);
   } catch (error) {
       console.error('Error deleting tagged files:', error);
       throw new Error('An error occurred while deleting tagged files');
