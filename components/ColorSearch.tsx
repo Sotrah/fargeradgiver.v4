@@ -12,7 +12,7 @@ interface CustomResultsProps{
 
 }
 
-const CustomResultsComponent: React.FC<CustomResultsProps> = ({ searchState, searchResults, onResultsUpdate }) => {
+const CustomResultsComponent: React.FC<CustomResultsProps> = ({searchResults, onResultsUpdate }) => {
     useEffect(() => {
         if (searchResults && searchResults.hits.length > 0) {
             onResultsUpdate(searchResults.hits as HitProps[]);

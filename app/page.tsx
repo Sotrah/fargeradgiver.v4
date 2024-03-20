@@ -4,7 +4,7 @@ import RecentColorPicker from "../components/RecentColorPicker";
 import {ColorType} from "@/components/ColorType";
 import ImageGridCard from "../components/ImageGridCard";
 import React, {useEffect, useState} from "react";
-import {formatHexColor} from "@/components/Utils";
+import {formatHexColor, mapHitsToColorType} from "@/components/Utils";
 import {useSpinDelay} from "spin-delay";
 import {ScaleLoader} from "react-spinners";
 import CldImage from "../components/CldImage";
@@ -25,7 +25,18 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [imageToTransform, setImageToTransform] = useState<String | null>('http://res.cloudinary.com/dj6mfsxnu/image/upload/v1707474684/jgxom27mvriax5av0prr.png');
   const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
-  const [searchResults, setSearchResults] = useState<HitProps[]>([]);
+  const [searchResults, setSearchResults] = useState<ColorType[]>([]);
+
+  const handleResultsUpdate = (hits: HitProps[]) => {
+    // Convert HitProps[] to ColorType[]
+    const convertedResults = mapHitsToColorType(hits);
+    if (searchResults.length !== convertedResults.length || !convertedResults.every((result, index) => result.code === searchResults[index]?.code)) {
+      setSearchResults(convertedResults); // Update state with converted results
+    }
+  };
+
+// Function to check if two arrays are equal
+
 
   useEffect(() => {
     setColors(colours_dump);
@@ -37,6 +48,7 @@ export default function Home() {
       setImageToTransform(selectedPicture)
     }
   }
+  
   const handleColorSelect = (selectedColor: ColorType | null) => {
     setLoading(true);
     setSelectedColor(selectedColor)
@@ -169,9 +181,8 @@ export default function Home() {
           </div>
 
           <div>
-            <Search onResultsUpdate={setSearchResults}/>
-
-            <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} colors={searchResults.length > 0 ? searchResults : colors}/>
+            <Search onResultsUpdate={handleResultsUpdate} />
+            <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} colors={searchResults} />
           </div>
 
         </div>
