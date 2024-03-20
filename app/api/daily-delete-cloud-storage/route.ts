@@ -9,6 +9,7 @@ cloudinary.config({
 function callback(result: any){
   console.log(result);
   if (result.partial === true) {
+      console.log('More than 1000 images to delete, running delete function again');
       GET();
   }
   else {

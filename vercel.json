@@ -2,7 +2,7 @@
     "crons": [
       {
         "path": "/api/daily-delete-cloud-storage",
-        "schedule": "28 16 * * *"
+        "schedule": "* 4 * * *"
       }
     ]
 }
