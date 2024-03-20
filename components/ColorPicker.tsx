@@ -29,22 +29,21 @@ const ColorPicker: React.FC<{
         <>
             <div className="grid grid-cols-4 gap-6">
                 {colourData.slice(0, displayCount).map((colorItem, index) => (
-                    <button
-                        key={index}
-                        className={`w-full rounded-lg flex items-center justify-center overflow-hidden relative border-2 ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-transparent' } hover:border-gray-500`}
-                        style={{ backgroundColor: colorItem.hex, aspectRatio: '1/1' }}
-                        onClick={() => handleColorClick(colorItem)}
-                        aria-label={`Select ${colorItem.shortName} color`}
-                    >
-                        <span className="text-white px-1">{colorItem.shortName}</span>
-                    </button>
+                    <div key={index} className="w-full overflow-hidden rounded-lg border-2 relative flex flex-col items-center justify-center hover:border-gray-500">
+                        <button
+                            className={`w-full flex flex-col items-center justify-center ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-transparent'}`}
+                            style={{ backgroundColor: '#F9F9F9', height: '130px'}}
+                            onClick={() => handleColorClick(colorItem)}
+                            aria-label={`Select ${colorItem.shortName} color`}
+                        >
+                            {/* Mindre fargefirkant */}
+                            <div className="w-36 h-28 rounded-lg" style={{ backgroundColor: colorItem.hex }}></div>
+                            {/* Tekst under fargefirkanten */}
+                            <span className="mt-2 px-1 text-sm">{colorItem.code} {colorItem.shortName}</span>
+                        </button>
+                    </div>
                 ))}
             </div>
-            {displayCount < colourData.length && (
-                <button onClick={handleShowMore} className="mt-4 px-4 py-2 text-white border-blue-700 bg-blue-500 rounded">
-                    Show More
-                </button>
-            )}
         </>
     );
 };
