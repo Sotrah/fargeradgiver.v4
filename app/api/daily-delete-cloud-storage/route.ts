@@ -7,5 +7,11 @@ cloudinary.config({
 });
 
 export async function GET() {
-  cloudinary.api.root_folders().then(result=>console.log(result));
+  try {
+      const result = await cloudinary.api.root_folders();
+      return Response.json(result);
+  } catch (error) {
+      console.error('Error fetching root folders from Cloudinary:', error);
+      throw new Error('An error occurred while fetching root folders');
+  }
 }
