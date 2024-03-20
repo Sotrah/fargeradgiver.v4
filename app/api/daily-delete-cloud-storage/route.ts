@@ -17,6 +17,8 @@ function callback(result: any){
   }
 }
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const result = await cloudinary.api.delete_resources_by_tag('colorchangesigned')
