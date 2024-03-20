@@ -6,10 +6,17 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+function callback(result: any){
+  console.log(result);
+  if (result.partial === true) {
+      GET();
+  }
+}
+
 export async function GET() {
   try {
     const result = await cloudinary.api.delete_resources_by_tag('colorchangesigned')
-    // .then(result=>console.log(result));
+    .then(callback);
     return Response.json(result);
   } catch (error) {
       console.error('Error deleting tagged files:', error);
