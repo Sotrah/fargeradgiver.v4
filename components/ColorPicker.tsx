@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import colourData from './../colours_dump.json';
+import React from 'react';
 import { ColorType } from "@/components/ColorType";
-
+import colours_dump from "colours_dump.json"
 const ColorPicker: React.FC<{
     selectedColor: ColorType | null,
-    onColorSelect: (color: ColorType | null) => void }
-> = ({ selectedColor, onColorSelect,   }) => {
-    const [displayCount, setDisplayCount] = useState(16);
+    onColorSelect: (color: ColorType | null) => void,
+    colors?: ColorType[] } > = ({ selectedColor, onColorSelect, colors = [] }) => {
+    const [displayCount, setDisplayCount] = React.useState(16);
 
     const handleColorClick = (colorItem: ColorType) => {
         if (selectedColor && selectedColor.hex === colorItem.hex) {
@@ -28,7 +27,7 @@ const ColorPicker: React.FC<{
     return (
         <>
             <div className="grid grid-cols-4 gap-6">
-                {colourData.slice(0, displayCount).map((colorItem, index) => (
+                {colors.slice(0, displayCount).map((colorItem, index) => (
                     <button
                         key={index}
                         className={`w-full rounded-lg flex items-center justify-center overflow-hidden relative border-2 ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-transparent' } hover:border-gray-500`}
@@ -40,7 +39,7 @@ const ColorPicker: React.FC<{
                     </button>
                 ))}
             </div>
-            {displayCount < colourData.length && (
+            {displayCount < colors.length && (
                 <button onClick={handleShowMore} className="mt-4 px-4 py-2 text-white border-blue-700 bg-blue-500 rounded">
                     Show More
                 </button>

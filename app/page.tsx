@@ -3,13 +3,14 @@ import ColorPicker from "../components/ColorPicker";
 import RecentColorPicker from "../components/RecentColorPicker";
 import {ColorType} from "@/components/ColorType";
 import ImageGridCard from "../components/ImageGridCard";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {formatHexColor} from "@/components/Utils";
 import {useSpinDelay} from "spin-delay";
 import {ScaleLoader} from "react-spinners";
 import CldImage from "../components/CldImage";
-import { Search } from "@/components/ColorSearch";
-
+import {Search}  from "@/components/ColorSearch";
+import colours_dump from "colours_dump.json"
+import {HitProps} from "@/components/ColorSearchHit";
 
 export default function Home() {
   // type CloudinaryResult = {
@@ -22,10 +23,13 @@ export default function Home() {
   const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
   const [visibleModule, setVisibleModule] = useState("modul2");
   const [loading, setLoading] = useState(false);
-
   const [imageToTransform, setImageToTransform] = useState<String | null>('http://res.cloudinary.com/dj6mfsxnu/image/upload/v1707474684/jgxom27mvriax5av0prr.png');
+  const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
+  const [searchResults, setSearchResults] = useState<HitProps[]>([]);
 
-
+  useEffect(() => {
+    setColors(colours_dump);
+  }, []);
 
   const handleImageSelect = (selectedPicture: String) => {
     if (selectedPicture != imageToTransform) {
@@ -37,8 +41,6 @@ export default function Home() {
     setLoading(true);
     setSelectedColor(selectedColor)
   }
-
-
   const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
 
   return (
@@ -165,10 +167,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <Search />
 
           <div>
-            <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+            <Search onResultsUpdate={setSearchResults}/>
+
+            <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} colors={searchResults.length > 0 ? searchResults : colors}/>
           </div>
 
         </div>
@@ -176,4 +179,3 @@ export default function Home() {
   )
       ;
 }
- 
