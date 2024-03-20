@@ -11,6 +11,9 @@ function callback(result: any){
   if (result.partial === true) {
       GET();
   }
+  else {
+      console.log('Less than 1000 images deleted, none leftover');
+  }
 }
 
 export async function GET() {
