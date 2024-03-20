@@ -8,10 +8,10 @@ cloudinary.config({
 
 export async function GET() {
   try {
-      const result = await cloudinary.api.root_folders();
-      return Response.json(result);
+    const result = await cloudinary.api.delete_resources_by_tag('colorchangesigned')
+    return Response.json(result);
   } catch (error) {
-      console.error('Error fetching root folders from Cloudinary:', error);
-      throw new Error('An error occurred while fetching root folders');
+      console.error('Error deleting tagged files:', error);
+      throw new Error('An error occurred while deleting tagged files');
   }
 }
