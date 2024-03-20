@@ -165,7 +165,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <Search />
 
           <div>
             <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
