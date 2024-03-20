@@ -6,4 +6,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-cloudinary.api.root_folders().then(result=>console.log(result));
+export async function GET() {
+  cloudinary.api.root_folders().then(result=>console.log(result));
+}
