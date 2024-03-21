@@ -102,3 +102,44 @@ body {
   --tw-bg-opacity: 1;
   background-color: rgb(245, 249, 255/var(--tw-bg-opacity));
 }
+
+.colorInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.colorName {
+  font-size: 16px;
+  font-weight: bold;
+}
+.colorCode {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@media (min-width: 600px) {
+  .colorName {
+    font-size: 18px;
+  }
+  .colorCode {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .colorName {
+    font-size: 14px;
+  }
+  .colorCode {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1292px) {
+  .colorName {
+    font-size: 18px;
+  }
+  .colorCode {
+    font-size: 16px;
+  }
+}

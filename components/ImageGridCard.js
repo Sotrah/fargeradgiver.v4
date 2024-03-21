@@ -27,7 +27,7 @@ const ImageGridCard = ({ onPictureSelect }) =>  {
     };
 
     return (
-        <div className="grid md:grid-cols-2 grid-cols-4 gap-2 justify-start">
+        <div className="grid lg:grid-cols-2 grid-cols-4 gap-2 justify-start">
             {images.map((src, index) => (
                 <div
                     key={index}
