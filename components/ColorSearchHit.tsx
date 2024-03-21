@@ -2,12 +2,12 @@ import React from 'react'; // Ensure React is imported when using JSX in TypeScr
 
 // Define a TypeScript interface for the Hit object's structure
 export interface HitProps {
-    code: string;
-    description: string;
-    fullName: string;
-    hex: string;
-    ncsCode: string;
-    shortName: string;
+        code: string;
+        description: string;
+        fullName: string;
+        hex: string;
+        ncsCode: string;
+        shortName: string;
 }
 export const Hit: React.FC<{hit: HitProps}> = ({ hit }) => {
     return (

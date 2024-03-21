@@ -19,44 +19,44 @@ export default function Home() {
     //   public_id: string;
     // };
 
-    const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
-    const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
-    const [visibleModule, setVisibleModule] = useState("modul2");
-    const [loading, setLoading] = useState(false);
-    const [imageToTransform, setImageToTransform] = useState<String | null>('http://res.cloudinary.com/dj6mfsxnu/image/upload/v1707474684/jgxom27mvriax5av0prr.png');
-    const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
-    const [searchResults, setSearchResults] = useState<ColorType[]>([]);
+  const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
+  const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
+  const [visibleModule, setVisibleModule] = useState("modul2");
+  const [loading, setLoading] = useState(false);
+  const [imageToTransform, setImageToTransform] = useState<String | null>('http://res.cloudinary.com/dj6mfsxnu/image/upload/v1707474684/jgxom27mvriax5av0prr.png');
+  const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
+  const [searchResults, setSearchResults] = useState<ColorType[]>([]);
 
-    const handleResultsUpdate = (hits: HitProps[]) => {
-        // Convert HitProps[] to ColorType[]
-        const convertedResults = mapHitsToColorType(hits);
-        if (searchResults.length !== convertedResults.length || !convertedResults.every((result, index) => result.code === searchResults[index]?.code)) {
-            setSearchResults(convertedResults); // Update state with converted results
-        }
-    };
+  const handleResultsUpdate = (hits: HitProps[]) => {
+    // Convert HitProps[] to ColorType[]
+    const convertedResults = mapHitsToColorType(hits);
+    if (searchResults.length !== convertedResults.length || !convertedResults.every((result, index) => result.code === searchResults[index]?.code)) {
+      setSearchResults(convertedResults); // Update state with converted results
+    }
+  };
 
 // Function to check if two arrays are equal
 
 
-    useEffect(() => {
-        setColors(colours_dump);
-    }, []);
+  useEffect(() => {
+    setColors(colours_dump);
+  }, []);
 
-    const handleImageSelect = (selectedPicture: String) => {
-        if (selectedPicture != imageToTransform) {
-            setLoading(true);
-            setImageToTransform(selectedPicture)
-        }
+  const handleImageSelect = (selectedPicture: String) => {
+    if (selectedPicture != imageToTransform) {
+      setLoading(true);
+      setImageToTransform(selectedPicture)
     }
+  }
 
-    const handleColorSelect = (selectedColor: ColorType | null) => {
-        setLoading(true);
-        setSelectedColor(selectedColor)
-    }
-    const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
+  const handleColorSelect = (selectedColor: ColorType | null) => {
+    setLoading(true);
+    setSelectedColor(selectedColor)
+  }
+  const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
 
 
-    return (
+  return (
       <div className="new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
 
         {/*Navbar*/}
@@ -185,6 +185,7 @@ export default function Home() {
                   {/*Søkebar*/}
                         <div className="flex-grow">
                   {visibleModule === "modul2" && (
+
                       <div>
                           <Search onResultsUpdate={handleResultsUpdate}/>
                           <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}
@@ -197,6 +198,7 @@ export default function Home() {
                         {visibleModule === "modul2" && (
                             <div className="color-picker flex-grow">
                             <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+
                     </div>
                 )}
 
@@ -210,11 +212,10 @@ export default function Home() {
                         </div>
                     </div>
 
-          </div>
 
         </div>
       </div>
+    </div>
   )
       ;
 }
- 
