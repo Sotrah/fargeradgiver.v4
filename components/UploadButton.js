@@ -19,8 +19,10 @@ const UploadButton = ({ onUploadSuccess }) => {
         }
       }}
       options={{
-        sources: ['local', 'url', 'camera'],
+        sources: ['local'],
         multiple: false,
+        autoMinimize: true,
+        
       }}
     />
   );
