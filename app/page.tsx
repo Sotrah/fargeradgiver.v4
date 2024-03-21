@@ -81,141 +81,156 @@ export default function Home() {
             <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 space-y-6 lg:space-y-0 lg:space-x-4">
 
                 {/*Bildevelger*/}
-              <div className="lg:col-span-1 lg:order-1">
-                  <div className="elements-container text-left text-xl">
-                      <div className="image-grid-card">
-                          <p className="lg:hidden">Velg bildestil</p>
-                          <ImageGridCard onPictureSelect={handleImageSelect}/>
-                      </div>
-                  </div>
-              </div>
+                <div className="lg:col-span-1 lg:order-1">
+                    <div className="elements-container text-left text-xl">
+                        <div className="image-grid-card">
+                            <p className="lg:hidden">Velg bildestil</p>
+                            <ImageGridCard onPictureSelect={handleImageSelect}/>
+                        </div>
+                    </div>
+                </div>
 
-                  {/*Hovedbildet */}
-                <div className="lg:col-span-1 lg:order-2">
-                  {/* The below section is dimmed until the image is loaded */}
-                <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full`}>
-                  {/* CldImage is documented here: https://next.cloudinary.dev/cldimage/configuration
+                {/*Hovedbildet */}
+                <div className="lg:col-span-1 lg:order-2 relative">
+                    {showSpinner && (
+                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-10">
+                            <ScaleLoader
+                                color="#000000"
+                                speedMultiplier={0.5}
+                                loading={showSpinner}
+                            />
+                        </div>
+                    )}
+                    {/* The below section is dimmed until the image is loaded */}
+                    <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full`}>
+                        {/* CldImage is documented here: https://next.cloudinary.dev/cldimage/configuration
                         If there is an image and a selectedColor selected, transform it with Recolor */}
-                  {imageToTransform && selectedColor && (
-                      <CldImage
-                          placeholder="empty"
-                          onLoad={() => setLoading(false)}
-                          width='1024'
-                          height='1024'
-                          src={imageToTransform}
-                          alt="Uploaded image"
-                          className="rounded-md"
-                          sizes="100vw"
-                          recolor={['every wall and walls', formattedHex]}
-                      />
-                  )}
-                  {imageToTransform && !selectedColor && (
-                      <CldImage
-                          placeholder="empty"
-                          onLoad={() => setLoading(false)}
-                          width='1024'
-                          height='1024'
-                          src={imageToTransform}
-                          alt="Uploaded image"
-                          className="rounded-md"
-                          sizes="100vw"
-                      />
-                  )}
-                </div>
+                        {imageToTransform && selectedColor && (
+                            <CldImage
+                                placeholder="empty"
+                                onLoad={() => setLoading(false)}
+                                width='1024'
+                                height='1024'
+                                src={imageToTransform}
+                                alt="Uploaded image"
+                                className="rounded-md"
+                                sizes="100vw"
+                                recolor={['every wall and walls', formattedHex]}
+                            />
+                        )}
+                        {imageToTransform && !selectedColor && (
+                            <CldImage
+                                placeholder="empty"
+                                onLoad={() => setLoading(false)}
+                                width='1024'
+                                height='1024'
+                                src={imageToTransform}
+                                alt="Uploaded image"
+                                className="rounded-md"
+                                sizes="100vw"
+                            />
+                        )}
+                    </div>
                 </div>
 
-                  {/*Info om valgt farge*/}
+
+                {/*Info om valgt farge*/}
                 <div className="lg:col-span-1 lg:col-start-2 lg:order-5 lg:mt-6">
-                      {selectedColor && (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '15px'}}>
-                              <div style={{ backgroundColor: `#${formattedHex}`, width: '100px', height: '100px', borderRadius: '8px',}}>
-                              </div>
-                              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                  <span className="colorName">{selectedColor.fullName}</span>
-                                  <span className="colorCode">{selectedColor.ncsCode}</span>
-                              </div>
-                              <div>
-                                  <button
-                                      className="px-10 xl:px-10 lg:px-2 py-2 bg-green-500 hover:bg-green-700 text-white rounded">
-                                      Kjøp
-                                  </button>
-                              </div>
-                          </div>
-                      )}
-            </div>
-
-
-
-                    {/*Siste kolonne på desktopview*/}
-                    <div className="lg:col-span-1 lg:order-3">
-                        <div className="w-full aspect-square overflow-y-auto">
-                            {/* Innhold som tillater scrolling */}
-                            <div className="p-2">
-                  {/*Tabs for fargevalg*/}
-                  <div className="flex-grow text-center xl:text-lg lg:text-xs text-lg my-4 flex justify-between">
-                      <button
-                          style={{
-                              borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
-                              fontWeight: visibleModule === "modul2" ? "bold" : "",
-                              color: visibleModule === "modul2" ? "black" : "gray"
-                          }}
-                          onClick={() => setVisibleModule("modul2")}>
-                          Finn en farge
-                      </button>
-                      <button
-                          style={{
-                              borderBottom: visibleModule === "modul3" ? "4px solid blue" : "",
-                              fontWeight: visibleModule === "modul3" ? "bold" : "",
-                        color: visibleModule === "modul3" ? "black" : "gray"
-                      }}
-                      onClick={() => setVisibleModule("modul3")}>
-                    Nylig brukt
-                  </button>
-                  <button
-                      style={{
-                        borderBottom: visibleModule === "modul4" ? "4px solid blue" : "",
-                        fontWeight: visibleModule === "modul4" ? "bold" : "",
-                        color: visibleModule === "modul4" ? "black" : "gray"
-                      }}
-                      onClick={() => setVisibleModule("modul4")}>
-                    Dine favoritter
-                  </button>
+                    {selectedColor && (
+                        <div style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
+                            <div style={{
+                                backgroundColor: `#${formattedHex}`,
+                                width: '100px',
+                                height: '100px',
+                                borderRadius: '8px',
+                            }}>
+                            </div>
+                            <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                                <span className="colorName">{selectedColor.fullName}</span>
+                                <span className="colorCode">{selectedColor.ncsCode}</span>
+                            </div>
+                            <div>
+                                <button
+                                    className="px-10 xl:px-10 lg:px-2 py-2 bg-green-500 hover:bg-green-700 text-white rounded">
+                                    Kjøp
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
-                  {/*Søkebar*/}
-                        <div className="flex-grow">
-                  {visibleModule === "modul2" && (
 
-                      <div>
-                          <Search onResultsUpdate={handleResultsUpdate}/>
-                          <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}
-                                       colors={searchResults}/>
-                      </div>
-                  )}
+                {/*Siste kolonne på desktopview*/}
+                <div className="lg:col-span-1 lg:order-3">
+                    <div className="w-full aspect-square overflow-y-auto">
+                        {/* Innhold som tillater scrolling */}
+                        <div className="p-2">
+                            {/*Tabs for fargevalg*/}
+                            <div
+                                className="flex-grow text-center xl:text-lg lg:text-xs text-lg my-4 flex justify-between">
+                                <button
+                                    style={{
+                                        borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
+                                        fontWeight: visibleModule === "modul2" ? "bold" : "",
+                                        color: visibleModule === "modul2" ? "black" : "gray"
+                                    }}
+                                    onClick={() => setVisibleModule("modul2")}>
+                                    Finn en farge
+                                </button>
+                                <button
+                                    style={{
+                                        borderBottom: visibleModule === "modul3" ? "4px solid blue" : "",
+                                        fontWeight: visibleModule === "modul3" ? "bold" : "",
+                                        color: visibleModule === "modul3" ? "black" : "gray"
+                                    }}
+                                    onClick={() => setVisibleModule("modul3")}>
+                                    Nylig brukt
+                                </button>
+                                <button
+                                    style={{
+                                        borderBottom: visibleModule === "modul4" ? "4px solid blue" : "",
+                                        fontWeight: visibleModule === "modul4" ? "bold" : "",
+                                        color: visibleModule === "modul4" ? "black" : "gray"
+                                    }}
+                                    onClick={() => setVisibleModule("modul4")}>
+                                    Dine favoritter
+                                </button>
+                            </div>
+
+                            {/*Søkebar*/}
+                            <div className="flex-grow">
+                                {visibleModule === "modul2" && (
+
+                                    <div>
+                                        <Search onResultsUpdate={handleResultsUpdate}/>
+                                        <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}
+                                                     colors={searchResults}/>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/*Fargevelger*/}
+                            {visibleModule === "modul2" && (
+                                <div className="color-picker flex-grow">
+                                    <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+
+                                </div>
+                            )}
+
+                            {/*Nylig brukt*/}
+                            {visibleModule === "modul3" && (
+                                <div className="recent-color-picker flex-grow">
+                                    <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                                </div>
+                            )}
                         </div>
-
-                        {/*Fargevelger*/}
-                        {visibleModule === "modul2" && (
-                            <div className="color-picker flex-grow">
-                            <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-
                     </div>
-                )}
-
-                {/*Nylig brukt*/}
-                {visibleModule === "modul3" && (
-                    <div className="recent-color-picker flex-grow">
-                      <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-                    </div>
-                )}
-                    </div>
-                        </div>
-                    </div>
+                </div>
 
 
+            </div>
         </div>
       </div>
-    </div>
   )
       ;
 }
