@@ -32,9 +32,9 @@ const ColorPicker: React.FC<{
             <div className="grid grid-cols-3 gap-4 lg:gap-2 xl:gap-4 mt-6">
 
                 {colors.slice(0, displayCount).map((colorItem, index) => (
-                    <div key={index} className="w-full overflow-hidden rounded-lg border-2 relative hover:border-gray-500" style={{ paddingBottom: '100%' }}> {/* Sikrer 1:1 forhold */}
+                    <div key={index} className={`w-full overflow-hidden rounded-lg border-2 relative  hover:border-gray-500 ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-lightgray'}`} style={{ paddingBottom: '100%' }}> {/* Sikrer 1:1 forhold */}
                         <button
-                            className={`absolute inset-0 flex flex-col items-center justify-center ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-transparent'}`}
+                            className={`absolute inset-0 flex flex-col items-center justify-center `}
                             style={{ backgroundColor: '#F9F9F9' }}
                             onClick={() => handleColorClick(colorItem)}
                             aria-label={`Select ${colorItem.shortName} color`}
