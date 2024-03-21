@@ -90,7 +90,7 @@ export default function Home() {
                   </div>
               </div>
 
-                  {/*Hovedbildet*/}
+                  {/*Hovedbildet */}
                 <div className="lg:col-span-1 lg:order-2">
                   {/* The below section is dimmed until the image is loaded */}
                 <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full`}>
