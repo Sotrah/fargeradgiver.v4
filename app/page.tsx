@@ -1,6 +1,7 @@
 "use client";
 import ColorPicker from "../components/ColorPicker";
 import RecentColorPicker from "../components/RecentColorPicker";
+import FavoriteColorPicker from "../components/FavoriteColorPicker";
 import {ColorType} from "@/components/ColorType";
 import ImageGridCard from "../components/ImageGridCard";
 import React, {useEffect, useState} from "react";
@@ -214,19 +215,20 @@ export default function Home() {
                             </div>
 
                             {/*Fargevelger*/}
-                            {visibleModule === "modul2" && (
-                                <div className="color-picker flex-grow">
-                                    <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            <div className={`${visibleModule === "modul2" ? "" : "hidden"} w-full h-full color-picker flex-grow`}>
+                                <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            </div>
 
-                                </div>
-                            )}
+                            {/*Nylig brukte farger*/}
+                            <div className={`${visibleModule === "modul3" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
+                                <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            </div>
 
-                            {/*Nylig brukt*/}
-                            {visibleModule === "modul3" && (
-                                <div className="recent-color-picker flex-grow">
-                                    <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-                                </div>
-                            )}
+                            {/*Favoritte farger*/}
+                            <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
+                                <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

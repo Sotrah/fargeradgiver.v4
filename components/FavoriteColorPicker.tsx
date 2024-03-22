@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { ColorType } from "@/components/ColorType";
 
-const RecentColorPicker: React.FC<{ selectedColor: ColorType | null, onColorSelect: (color: ColorType | null) => void }> = ({ selectedColor, onColorSelect }) => {
+const FavoriteColorPicker: React.FC<{ selectedColor: ColorType | null, onColorSelect: (color: ColorType | null) => void }> = ({ selectedColor, onColorSelect }) => {
 
-    const [recentColors, setRecentColors] = useState<ColorType[]>([]);
+    const [favoriteColors, setFavoriteColors] = useState<ColorType[]>([]);
 
     useEffect(() => {
         if (selectedColor) {
-            updateRecentColors(selectedColor);
+            updateFavoriteColors(selectedColor);
         }
     }, [selectedColor]);
 
-    const updateRecentColors = (selectedColor: ColorType) => {
-        if (!recentColors.includes(selectedColor)) {
-            setRecentColors((prevColors: ColorType[]) => [selectedColor, ...prevColors]);
-                console.log('Recent colors:', recentColors);
+    const updateFavoriteColors = (selectedColor: ColorType) => {
+        if (!favoriteColors.includes(selectedColor)) {
+            setFavoriteColors((prevColors: ColorType[]) => [selectedColor, ...prevColors]);
+                console.log('Favorite colors:', favoriteColors);
         }  
     }
 
@@ -33,7 +33,7 @@ const RecentColorPicker: React.FC<{ selectedColor: ColorType | null, onColorSele
 
     return (
         <div className="grid grid-cols-4 gap-6">
-            {recentColors.map((colorItem, index) => (
+            {favoriteColors.map((colorItem, index) => (
                 <div
                     key={index}
                     className={`w-full rounded-lg flex items-center justify-center overflow-hidden relative border-2 ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-transparent'} hover:border-gray-500`}
@@ -46,4 +46,4 @@ const RecentColorPicker: React.FC<{ selectedColor: ColorType | null, onColorSele
     );
 };
 
-export default RecentColorPicker;
+export default FavoriteColorPicker;
