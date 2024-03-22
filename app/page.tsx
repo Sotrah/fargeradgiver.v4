@@ -21,6 +21,7 @@ export default function Home() {
     // };
 
   const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
+  const [favoriteColors, setFavoriteColors] = useState<ColorType[]>([]);
   const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
   const [visibleModule, setVisibleModule] = useState("modul2");
   const [loading, setLoading] = useState(false);
@@ -225,8 +226,8 @@ export default function Home() {
                             </div>
 
                             {/*Favoritte farger*/}
-                            <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
-                                <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full favorite-color-picker flex-grow`}>
+                                <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} favoriteColors={favoriteColors}/>
                             </div>
                             
                         </div>
