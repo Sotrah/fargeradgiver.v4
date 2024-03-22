@@ -205,7 +205,7 @@ export default function Home() {
 
 
 
-                            {/*Søkebar*/}
+                            {/*Søkebar */}
                             <div className="flex-grow overflow-y-scroll"style={{ aspectRatio: '6 / 10' }}>
                                 {visibleModule === "modul2" && (
 
