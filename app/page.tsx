@@ -2,6 +2,7 @@
 import ColorPicker from "../components/ColorPicker";
 import RecentColorPicker from "../components/RecentColorPicker";
 import FavoriteColorPicker from "../components/FavoriteColorPicker";
+import { FavoriteColorContext } from "@/components/FavoriteColorContext";
 import {ColorType} from "@/components/ColorType";
 import ImageGridCard from "@/components/ImageGridCard";
 import React, {useEffect, useState} from "react";
@@ -21,6 +22,7 @@ export default function Home() {
     // };
 
   const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
+  const [favoriteColors, setFavoriteColors] = useState<ColorType[]>([]);
   const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
   const [visibleModule, setVisibleModule] = useState("modul2");
   const [loading, setLoading] = useState(false);
@@ -59,6 +61,7 @@ export default function Home() {
 
 
   return (
+    <FavoriteColorContext.Provider value={{ favoriteColors, setFavoriteColors }}>
       <div className="bg-jernia-nettside new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
 
         {/*Navbar*/}
@@ -151,6 +154,7 @@ export default function Home() {
                                 height: '60px',
                                 borderRadius: '8px',
                             }}>
+                                <img src="/jernia-paint-blob.png" alt="Paint blob"/>
                             </div>
                             <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                                 <span className="colorName">{selectedColor.fullName}</span>
@@ -230,8 +234,8 @@ export default function Home() {
                             </div>
 
                             {/*Favoritte farger*/}
-                            <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
-                                <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full favorite-color-picker flex-grow`}>
+                                <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} favoriteColors={favoriteColors}/>
                             </div>
                             
                         </div>
@@ -240,6 +244,7 @@ export default function Home() {
             </div>
         </div>
       </div>
+      </FavoriteColorContext.Provider>
   )
       ;
 }

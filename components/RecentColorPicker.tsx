@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ColorType } from "@/components/ColorType";
+import ColorCard from "@/components/ColorCard";
 
 const RecentColorPicker: React.FC<{ selectedColor: ColorType | null, onColorSelect: (color: ColorType | null) => void }> = ({ selectedColor, onColorSelect }) => {
 
@@ -32,15 +33,9 @@ const RecentColorPicker: React.FC<{ selectedColor: ColorType | null, onColorSele
     };
 
     return (
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid grid-cols-3 gap-4 lg:gap-2 xl:gap-4 mt-6">
             {recentColors.map((colorItem, index) => (
-                <div
-                    key={index}
-                    className={`w-full rounded-lg flex items-center justify-center overflow-hidden relative border-2 ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-transparent'} hover:border-gray-500`}
-                    style={{ backgroundColor: colorItem.hex, aspectRatio: '1/1' }} 
-                    onClick={() => handleColorClick(colorItem)}
-                > 
-                </div>
+                <ColorCard key={index} colorItem={colorItem} handleColorClick={handleColorClick} selectedColor={selectedColor} />
             ))}
         </div>
     );
