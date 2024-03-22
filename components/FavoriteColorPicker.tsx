@@ -10,7 +10,7 @@ const FavoriteColorPicker: React.FC<{
     favoriteColors: ColorType[],
     onColorSelect: (color: ColorType | null) => void }> = ({ selectedColor, onColorSelect }) => {
 
-    const favoriteColors = useContext(FavoriteColorContext);
+    const { favoriteColors } = useContext(FavoriteColorContext);
 
     
 

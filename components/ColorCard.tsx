@@ -1,6 +1,6 @@
 import { ColorType } from "@/components/ColorType";
 import { useContext } from 'react';
-import { FavoriteColorContext } from "@/components/FavoriteColorContext";
+import { FavoriteColorContext, FavoriteColorContextType } from './FavoriteColorContext';
 
 interface ColorCardProps {
     colorItem: ColorType;
@@ -9,18 +9,23 @@ interface ColorCardProps {
 }
 
 const ColorCard: React.FC<ColorCardProps> = ({ colorItem, handleColorClick, selectedColor }) => {
-    const favoriteColors = useContext(FavoriteColorContext);
+    const { favoriteColors, setFavoriteColors }: FavoriteColorContextType = useContext(FavoriteColorContext);
+
+
 
     const handleFavoriteClick = (colorItem: ColorType) => {
         if (favoriteColors.includes(colorItem)) {
             const indexToRemove =favoriteColors.indexOf(colorItem);
             if (indexToRemove !== -1) {
-                favoriteColors.splice(indexToRemove, 1);
+                const updatedFavoriteColors: ColorType[] = [...favoriteColors]; // Create a copy of the array
+                updatedFavoriteColors.splice(indexToRemove, 1); // Remove colorItem from the copy
+                setFavoriteColors(updatedFavoriteColors); // Update state with the modified array
               }
             return false;
         }
         else {
-            favoriteColors.push(colorItem);
+            const updatedFavoriteColors: ColorType[] = [...favoriteColors, colorItem]; // Add colorItem to a new copy of the array
+            setFavoriteColors(updatedFavoriteColors); // Update state with the modified array
             return true;
         }
     };
