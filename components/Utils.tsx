@@ -17,4 +17,6 @@ export function mapHitsToColorType(hits: HitProps[]): ColorType[] {
         shades: {}, // Adjust based on your data or application logic
         collections: [], // Adjust based on your data or application logic
     }));
+
 }
+
