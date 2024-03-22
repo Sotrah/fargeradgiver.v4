@@ -1,6 +1,7 @@
 "use client";
 import ColorPicker from "../components/ColorPicker";
 import RecentColorPicker from "../components/RecentColorPicker";
+import FavoriteColorPicker from "../components/FavoriteColorPicker";
 import {ColorType} from "@/components/ColorType";
 import ImageGridCard from "../components/ImageGridCard";
 import React, {useEffect, useState} from "react";
@@ -93,7 +94,7 @@ export default function Home() {
                 {/*Hovedbildet */}
                 <div className="lg:col-span-1 lg:order-2 relative">
                     {showSpinner && (
-                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-10">
+                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-20">
                             <ScaleLoader
                                 color="#000000"
                                 speedMultiplier={0.5}
@@ -105,31 +106,35 @@ export default function Home() {
                     <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full`}>
                         {/* CldImage is documented here: https://next.cloudinary.dev/cldimage/configuration
                         If there is an image and a selectedColor selected, transform it with Recolor */}
-                        {imageToTransform && selectedColor && (
-                            <CldImage
-                                placeholder="empty"
-                                onLoad={() => setLoading(false)}
-                                width='1024'
-                                height='1024'
-                                src={imageToTransform}
-                                alt="Uploaded image"
-                                className="rounded-md"
-                                sizes="100vw"
-                                recolor={['every wall and walls', formattedHex]}
-                            />
-                        )}
-                        {imageToTransform && !selectedColor && (
-                            <CldImage
-                                placeholder="empty"
-                                onLoad={() => setLoading(false)}
-                                width='1024'
-                                height='1024'
-                                src={imageToTransform}
-                                alt="Uploaded image"
-                                className="rounded-md"
-                                sizes="100vw"
-                            />
-                        )}
+                        <div className="flex justify-center items-center z-10">
+                            {imageToTransform && selectedColor && (
+                                <CldImage
+                                    placeholder="empty"
+                                    onLoad={() => setLoading(false)}
+                                    width='1024'
+                                    height='1024'
+                                    src={imageToTransform}
+                                    alt="Uploaded image"
+                                    className="rounded-md"
+                                    sizes="100vw"
+                                    recolor={['every wall and walls', formattedHex]}
+                                />
+                            )}
+                        </div>
+                        <div className="flex justify-center items-center z-0">
+                            {imageToTransform && !selectedColor && (
+                                <CldImage
+                                    placeholder="empty"
+                                    onLoad={() => setLoading(false)}
+                                    width='1024'
+                                    height='1024'
+                                    src={imageToTransform}
+                                    alt="Uploaded image"
+                                    className="rounded-md"
+                                    sizes="100vw"
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
 
@@ -212,19 +217,20 @@ export default function Home() {
                             </div>
 
                             {/*Fargevelger*/}
-                            {visibleModule === "modul2" && (
-                                <div className="color-picker flex-grow">
-                                    <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            <div className={`${visibleModule === "modul2" ? "" : "hidden"} w-full h-full color-picker flex-grow`}>
+                                <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            </div>
 
-                                </div>
-                            )}
+                            {/*Nylig brukte farger*/}
+                            <div className={`${visibleModule === "modul3" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
+                                <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            </div>
 
-                            {/*Nylig brukt*/}
-                            {visibleModule === "modul3" && (
-                                <div className="recent-color-picker flex-grow">
-                                    <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-                                </div>
-                            )}
+                            {/*Favoritte farger*/}
+                            <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
+                                <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
