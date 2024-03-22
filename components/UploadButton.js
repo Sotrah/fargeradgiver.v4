@@ -22,6 +22,11 @@ const UploadButton = ({ onUploadSuccess }) => {
         sources: ['local'],
         multiple: false,
         autoMinimize: true,
+        cropping: true,
+        showSkipCropButton: false,
+        croppingAspectRatio: 1,
+        language: 'no',
+        theme: 'minimal',
         
       }}
     />
