@@ -105,7 +105,7 @@ export default function Home() {
                     <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full`}>
                         {/* CldImage is documented here: https://next.cloudinary.dev/cldimage/configuration
                         If there is an image and a selectedColor selected, transform it with Recolor */}
-                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-10">
+                        <div className="flex justify-center items-center z-10">
                             {imageToTransform && selectedColor && (
                                 <CldImage
                                     placeholder="empty"
@@ -120,7 +120,7 @@ export default function Home() {
                                 />
                             )}
                         </div>
-                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-0">
+                        <div className="flex justify-center items-center z-0">
                             {imageToTransform && !selectedColor && (
                                 <CldImage
                                     placeholder="empty"
