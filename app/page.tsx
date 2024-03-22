@@ -209,34 +209,33 @@ export default function Home() {
 
 
 
-                            {/*Søkebar */}
-                            <div className="flex-grow overflow-y-scroll"style={{ aspectRatio: '6 / 10' }}>
-                                {visibleModule === "modul2" && (
+                            {/*Søkebar og Fargevelger*/}
+                            <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '6 / 10' }}>
+                                <div>
+                                    <Search onResultsUpdate={handleResultsUpdate}/>
 
-                                    <div>
-                                        <Search onResultsUpdate={handleResultsUpdate}/>
-
-                                        <ColorPicker onColorSelect={handleColorSelect}
-                                                     selectedColor={selectedColor}
-                                                     colors={searchResults}/>
-                                    </div>
-                                )}
+                                    <ColorPicker onColorSelect={handleColorSelect}
+                                                    selectedColor={selectedColor}
+                                                    colors={searchResults}/>
+                                </div>
                             </div>
+                                {/*Fargevelger*/}
+                                <div className={`${visibleModule === "modul2" ? "" : "hidden"} w-full h-full color-picker flex-grow`}>
+                                    <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                                </div>
 
-                            {/*Fargevelger*/}
-                            <div className={`${visibleModule === "modul2" ? "" : "hidden"} w-full h-full color-picker flex-grow`}>
-                                <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-                            </div>
+                                {/*Nylig brukte farger*/}
+                                <div className={`${visibleModule === "modul3" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
+                                    <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                                </div>
 
-                            {/*Nylig brukte farger*/}
-                            <div className={`${visibleModule === "modul3" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
-                                <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-                            </div>
+                                {/*Favoritte farger*/}
+                                <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full favorite-color-picker flex-grow`}>
+                                    <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} favoriteColors={favoriteColors}/>
+                                </div>
+                            
 
-                            {/*Favoritte farger*/}
-                            <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full favorite-color-picker flex-grow`}>
-                                <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} favoriteColors={favoriteColors}/>
-                            </div>
+                            
                             
                         </div>
                         </div>
