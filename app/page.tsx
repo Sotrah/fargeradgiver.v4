@@ -203,7 +203,9 @@ export default function Home() {
 
                                     <div>
                                         <Search onResultsUpdate={handleResultsUpdate}/>
-                                        <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}
+
+                                        <ColorPicker onColorSelect={handleColorSelect}
+                                                     selectedColor={selectedColor}
                                                      colors={searchResults}/>
                                     </div>
                                 )}

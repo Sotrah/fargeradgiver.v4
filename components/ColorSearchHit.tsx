@@ -8,6 +8,7 @@ export interface HitProps {
         hex: string;
         ncsCode: string;
         shortName: string;
+
 }
 export const Hit: React.FC<{hit: HitProps}> = ({ hit }) => {
     return (
