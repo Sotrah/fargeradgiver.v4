@@ -1,27 +1,31 @@
-'use client'
+'use client';
 import CloudinaryWrapper from "./CldImage";
 import { useState } from 'react';
 import UploadButton from "../components/UploadButton";
 
-const ImageGridCard = ({ onPictureSelect }) =>  {
-    const [selected, setSelected] = useState(0);
+// Define the type for the component props
+interface ImageGridCardProps {
+    onPictureSelect: (url: string) => void; // Assuming onPictureSelect expects a string and doesn't return anything
+}
 
-    const images = [
+const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
+    const [selected, setSelected] = useState<number>(0);
+
+    const images: string[] = [
         'http://res.cloudinary.com/dj6mfsxnu/image/upload/v1707474684/jgxom27mvriax5av0prr.png',
         'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1708953978/r0j1iltafpztvbssaout.jpg',
         'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1708954267/i9ff5slcnev06ckqp9oa.jpg',
-
     ];
 
-    const handleImageClick = (index) => {
+    const handleImageClick = (index: number): void => {
         setSelected(index);
         console.log("Selected image: " + images[index]);
         onPictureSelect(images[index]); // "Feed" the selected picture url to the parent component
     };
 
     // Function to handle the state update in the parent component
-    const handleUploadSuccess = (result) => {
-        setSelected(4);
+    const handleUploadSuccess = (result: string): void => {
+        setSelected(images.length); // Assuming this is meant to set selected to a new, unique value indicating an upload
         console.log(result);
         onPictureSelect(result); // "Feed" the selected picture url to the parent component
     };
@@ -34,8 +38,6 @@ const ImageGridCard = ({ onPictureSelect }) =>  {
                     className={`w-full rounded-lg flex items-center justify-center overflow-hidden relative border-2 ${selected === index ? 'border-black' : 'border-transparent'}  hover:border-gray-500`}
                     onClick={() => handleImageClick(index)}
                 >
-                    {/* <Image src={src} alt={`Image ${index + 1}`} layout="responsive" width={50} height={50}
-                           objectFit="cover"/> */}
                     <CloudinaryWrapper
                         width={500}
                         height={500}
@@ -47,13 +49,12 @@ const ImageGridCard = ({ onPictureSelect }) =>  {
                 </div>
             ))}
             <div
-                    key={images.length + 1}
-                    className={`relative border-2 ${selected === images.length + 1 ? 'border-black' : 'border-transparent'} rounded-lg`}
-                    onClick={() => handleImageClick(index)}
-                >
+                key={images.length}
+                className={`relative border-2 ${selected === images.length ? 'border-black' : 'border-transparent'} rounded-lg`}
+                onClick={() => handleUploadSuccess('')} // You might need a different handler here
+            >
                 <UploadButton onUploadSuccess={handleUploadSuccess} />
             </div>
-            
         </div>
     );
 }

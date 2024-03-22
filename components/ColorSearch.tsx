@@ -41,7 +41,7 @@ export const Search: React.FC<SearchProps> = ({ onResultsUpdate }) => {
             <SearchBox/>
             <CustomResults onResultsUpdate={onResultsUpdate}/>
             <button onClick={toggleCollapse} style={{marginBottom: '10px'}}>
-                {isCollapsed ? 'Show' : 'Hide'} Filters
+                {isCollapsed ? 'Vis filtere' : 'Gjem filtere'}
             </button>
             {/* Always render the RefinementList, but control its visibility with a CSS class */}
             <div className={isCollapsed ? 'hidden' : ''}>

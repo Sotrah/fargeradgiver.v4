@@ -3,7 +3,7 @@ import ColorPicker from "../components/ColorPicker";
 import RecentColorPicker from "../components/RecentColorPicker";
 import FavoriteColorPicker from "../components/FavoriteColorPicker";
 import {ColorType} from "@/components/ColorType";
-import ImageGridCard from "../components/ImageGridCard";
+import ImageGridCard from "@/components/ImageGridCard";
 import React, {useEffect, useState} from "react";
 import {formatHexColor, mapHitsToColorType} from "@/components/Utils";
 import {useSpinDelay} from "spin-delay";
