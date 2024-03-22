@@ -34,7 +34,7 @@ interface SearchProps {
 export const Search: React.FC<SearchProps> = ({ onResultsUpdate }) => {
     return (
         <InstantSearch searchClient={searchClient} indexName="colours_dump">
-            <Configure hitsPerPage={16} />
+            <Configure hitsPerPage={16} /> {/*Amount of search "hits"*/}
             <SearchBox />
             <CustomResults onResultsUpdate={onResultsUpdate} />
         </InstantSearch>
