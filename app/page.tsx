@@ -57,12 +57,13 @@ export default function Home() {
   const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
 
 
+
   return (
-      <div className="new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
+      <div className="bg-jernia-nettside new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
 
         {/*Navbar*/}
         <div className="c-site-header">
-          <div className="container">
+          <div className="main-container">
             <div className="c-site-header__top text-white text-2xl">
               <h1>Jernia</h1>
             </div>
@@ -70,7 +71,7 @@ export default function Home() {
         </div>
 
         {/*Overskrift og info*/}
-        <div className="container mx-auto px-4">
+        <div className="main-container mx-auto px-4">
           <div className="text-center my-8">
             <h1 className="text-3xl font-bold text-gray-800">Visualiseringsverktøy</h1>
             <p className="mt-4 text-lg text-gray-600">La deg inspirere av Jotuns fantastiske fargeunivers.
@@ -79,10 +80,10 @@ export default function Home() {
           </div>
 
             {/*Div-container til hovedelementene*/}
-            <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 space-y-6 lg:space-y-0 lg:space-x-4">
+            <div className="main-container grid grid-cols-1 lg:grid-cols-11 lg:grid-rows-4 space-y-6 lg:space-y-0 lg:gap-x-4 lg:gap-y-4">
 
                 {/*Bildevelger*/}
-                <div className="lg:col-span-1 lg:order-1">
+                <div className="lg:col-span-3 lg:row-span-4 lg:order-1">
                     <div className="elements-container text-left text-xl">
                         <div className="image-grid-card">
                             <p className="lg:hidden">Velg bildestil</p>
@@ -92,7 +93,7 @@ export default function Home() {
                 </div>
 
                 {/*Hovedbildet */}
-                <div className="lg:col-span-1 lg:order-2 relative">
+                <div className="lg:col-span-5 lg:row-span-3 lg:order-2">
                     {showSpinner && (
                         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-20">
                             <ScaleLoader
@@ -139,14 +140,15 @@ export default function Home() {
                 </div>
 
 
+
                 {/*Info om valgt farge*/}
-                <div className="lg:col-span-1 lg:col-start-2 lg:order-5 lg:mt-6">
+                <div className="lg:col-span-5 lg:row-span-1 lg:order-5  rounded-lg bg-white px-3 py-3">
                     {selectedColor && (
                         <div style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
                             <div style={{
                                 backgroundColor: `#${formattedHex}`,
-                                width: '100px',
-                                height: '100px',
+                                width: '60px',
+                                height: '60px',
                                 borderRadius: '8px',
                             }}>
                             </div>
@@ -156,7 +158,7 @@ export default function Home() {
                             </div>
                             <div>
                                 <button
-                                    className="px-10 xl:px-10 lg:px-2 py-2 bg-green-500 hover:bg-green-700 text-white rounded">
+                                    className="px-6 xl:px-10 lg:px-2 py-1 md:py-2 bg-green-500 hover:bg-green-700 text-white rounded">
                                     Kjøp
                                 </button>
                             </div>
@@ -165,14 +167,13 @@ export default function Home() {
                 </div>
 
 
+
                 {/*Siste kolonne på desktopview*/}
-                <div className="lg:col-span-1 lg:order-3">
-                    <div className="w-full aspect-square overflow-y-auto">
-                        {/* Innhold som tillater scrolling */}
-                        <div className="p-2">
+                <div className="lg:col-span-3 lg:row-span-4 lg:order-3">
+                    <div className="w-full">
                             {/*Tabs for fargevalg*/}
                             <div
-                                className="flex-grow text-center xl:text-lg lg:text-xs text-lg my-4 flex justify-between">
+                                className="flex-grow text-center xl:text-lg lg:text-xs text-md flex justify-between sticky top-0 z-10 bg-jernia-nettside pb-2">
                                 <button
                                     style={{
                                         borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
@@ -202,8 +203,10 @@ export default function Home() {
                                 </button>
                             </div>
 
-                            {/*Søkebar*/}
-                            <div className="flex-grow">
+
+
+                            {/*Søkebar */}
+                            <div className="flex-grow overflow-y-scroll"style={{ aspectRatio: '6 / 10' }}>
                                 {visibleModule === "modul2" && (
 
                                     <div>
@@ -232,9 +235,7 @@ export default function Home() {
                             </div>
                             
                         </div>
-                    </div>
-                </div>
-
+                        </div>
 
             </div>
         </div>
