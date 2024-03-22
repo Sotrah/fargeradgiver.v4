@@ -29,7 +29,7 @@ const ColorPicker: React.FC<{
     };
 
     return (
-        <>
+        <div>
 
             <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-2 xl:gap-4 mt-6">
 
@@ -42,7 +42,7 @@ const ColorPicker: React.FC<{
                     Show More
                 </button>
             )}
-        </>
+        </div>
     );
 };
 

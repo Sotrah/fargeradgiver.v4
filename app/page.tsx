@@ -175,75 +175,64 @@ export default function Home() {
                 {/*Siste kolonne på desktopview*/}
                 <div className="lg:col-span-3 lg:row-span-4 lg:order-3">
                     <div className="w-full">
-                            {/*Tabs for fargevalg*/}
-                            <div
-                                className="flex-grow text-center xl:text-lg lg:text-xs text-md flex justify-between sticky top-0 z-10 bg-jernia-nettside pb-2">
-                                <button
-                                    style={{
-                                        borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
-                                        fontWeight: visibleModule === "modul2" ? "bold" : "",
-                                        color: visibleModule === "modul2" ? "black" : "gray"
-                                    }}
-                                    onClick={() => setVisibleModule("modul2")}>
-                                    Finn en farge
-                                </button>
-                                <button
-                                    style={{
-                                        borderBottom: visibleModule === "modul3" ? "4px solid blue" : "",
-                                        fontWeight: visibleModule === "modul3" ? "bold" : "",
-                                        color: visibleModule === "modul3" ? "black" : "gray"
-                                    }}
-                                    onClick={() => setVisibleModule("modul3")}>
-                                    Nylig brukt
-                                </button>
-                                <button
-                                    style={{
-                                        borderBottom: visibleModule === "modul4" ? "4px solid blue" : "",
-                                        fontWeight: visibleModule === "modul4" ? "bold" : "",
-                                        color: visibleModule === "modul4" ? "black" : "gray"
-                                    }}
-                                    onClick={() => setVisibleModule("modul4")}>
-                                    Dine favoritter
-                                </button>
-                            </div>
-
-
-
-                            {/*Søkebar og Fargevelger*/}
-                            <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '6 / 10' }}>
-                                <div>
-                                    <Search onResultsUpdate={handleResultsUpdate}/>
-
-                                    <ColorPicker onColorSelect={handleColorSelect}
-                                                    selectedColor={selectedColor}
-                                                    colors={searchResults}/>
-                                </div>
-                            </div>
-                                {/*Fargevelger*/}
-                                <div className={`${visibleModule === "modul2" ? "" : "hidden"} w-full h-full color-picker flex-grow`}>
-                                    <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-                                </div>
-
-                                {/*Nylig brukte farger*/}
-                                <div className={`${visibleModule === "modul3" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
-                                    <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-                                </div>
-
-                                {/*Favoritte farger*/}
-                                <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full favorite-color-picker flex-grow`}>
-                                    <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} favoriteColors={favoriteColors}/>
-                                </div>
-                            
-
-                            
-                            
+                        {/*Tabs for fargevalg*/}
+                        <div
+                            className="flex-grow text-center xl:text-lg lg:text-xs text-md flex justify-between sticky top-0 z-10 bg-jernia-nettside pb-2">
+                            <button
+                                style={{
+                                    borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
+                                    fontWeight: visibleModule === "modul2" ? "bold" : "",
+                                    color: visibleModule === "modul2" ? "black" : "gray"
+                                }}
+                                onClick={() => setVisibleModule("modul2")}>
+                                Finn en farge
+                            </button>
+                            <button
+                                style={{
+                                    borderBottom: visibleModule === "modul3" ? "4px solid blue" : "",
+                                    fontWeight: visibleModule === "modul3" ? "bold" : "",
+                                    color: visibleModule === "modul3" ? "black" : "gray"
+                                }}
+                                onClick={() => setVisibleModule("modul3")}>
+                                Nylig brukt
+                            </button>
+                            <button
+                                style={{
+                                    borderBottom: visibleModule === "modul4" ? "4px solid blue" : "",
+                                    fontWeight: visibleModule === "modul4" ? "bold" : "",
+                                    color: visibleModule === "modul4" ? "black" : "gray"
+                                }}
+                                onClick={() => setVisibleModule("modul4")}>
+                                Dine favoritter
+                            </button>
                         </div>
+
+                        {/*Søkebar og Fargevelger*/}
+                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '6 / 10' }}>
+                            <div>
+                                <Search onResultsUpdate={handleResultsUpdate}/>
+
+                                <ColorPicker onColorSelect={handleColorSelect}
+                                                selectedColor={selectedColor}
+                                                colors={searchResults}/>
+                            </div>
                         </div>
+
+                        {/*Nylig brukte farger*/}
+                        <div className={`${visibleModule === "modul3" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
+                            <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                        </div>
+
+                        {/*Favoritte farger*/}
+                        <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full favorite-color-picker flex-grow`}>
+                            <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} favoriteColors={favoriteColors}/>
+                        </div>   
+                    </div>
+                </div>
 
             </div>
         </div>
       </div>
-      </FavoriteColorContext.Provider>
-  )
-      ;
+    </FavoriteColorContext.Provider>
+  );
 }
