@@ -6,7 +6,7 @@ import {HitProps} from "@/components/ColorSearchHit";
 import {SearchResults} from "algoliasearch-helper";
 
 interface CustomResultsProps{
-    searchState: any; // Replace `any` with a specific type if available
+    searchState: any;
     searchResults: SearchResults<HitProps>;
     onResultsUpdate: (hits: HitProps[]) => null;
 
@@ -37,14 +37,16 @@ export const Search: React.FC<SearchProps> = ({ onResultsUpdate }) => {
     const toggleCollapse = () => setIsCollapsed(!isCollapsed); // Toggle function
     return (
         <InstantSearch searchClient={searchClient} indexName="colours_dump">
-            <Configure hitsPerPage={200} />
-            <SearchBox />
-            <CustomResults onResultsUpdate={onResultsUpdate} />
-            <button onClick={toggleCollapse} style={{ marginBottom: '10px' }}>
+            <Configure hitsPerPage={200}/>
+            <SearchBox/>
+            <CustomResults onResultsUpdate={onResultsUpdate}/>
+            <button onClick={toggleCollapse} style={{marginBottom: '10px'}}>
                 {isCollapsed ? 'Show' : 'Hide'} Filters
             </button>
-            {/* Conditionally render RefinementList based on isCollapsed state */}
-            {!isCollapsed && <RefinementList attribute="collections.name"/>}
+            {/* Always render the RefinementList, but control its visibility with a CSS class */}
+            <div className={isCollapsed ? 'hidden' : ''}>
+                <RefinementList attribute="collections.name"/>
+            </div>
         </InstantSearch>
     );
 };
