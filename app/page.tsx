@@ -60,24 +60,24 @@ export default function Home() {
   const searchParams = useSearchParams();
   const urlColor = searchParams.get('color');
 
-  useEffect(() => { 
-    // Check if hexcode is provided in the query parameters
-    if (urlColor) {
-        const urlHexCode = "#" + urlColor;
-        console.log("Hexcode from url: " + urlHexCode);
-        // Find the color with the provided hexcode
-        const urlColorObject = colors.find((color) => color.hex === urlHexCode);
-        console.log(urlColorObject);
-        // If the color is found, set it as the selected color
-        if (urlColorObject) {
-            handleColorSelect(urlColorObject);
-            console.log("URL color found: " + urlColorObject.shortName);
-        }
-        else {
-            console.log("URL color not found");
-        }
-    }
-}, [colors, urlColor, searchParams]);
+//   useEffect(() => { 
+//     // Check if hexcode is provided in the query parameters
+//     if (urlColor) {
+//         const urlHexCode = "#" + urlColor;
+//         console.log("Hexcode from url: " + urlHexCode);
+//         // Find the color with the provided hexcode
+//         const urlColorObject = colors.find((color) => color.hex === urlHexCode);
+//         console.log(urlColorObject);
+//         // If the color is found, set it as the selected color
+//         if (urlColorObject) {
+//             handleColorSelect(urlColorObject);
+//             console.log("URL color found: " + urlColorObject.shortName);
+//         }
+//         else {
+//             console.log("URL color not found");
+//         }
+//     }
+// }, [colors, urlColor, searchParams]);
 
   return (
     <FavoriteColorContext.Provider value={{ favoriteColors, setFavoriteColors }}>
