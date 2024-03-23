@@ -14,7 +14,7 @@ import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-
+export const dynamic = 'force-dynamic'
 export default function Home() {
 
   const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
@@ -55,8 +55,9 @@ export default function Home() {
   }
   const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
 
+  // Select color from URL if one is present
   const searchParams = useSearchParams();
-useEffect(() => { 
+  useEffect(() => { 
     const urlColor = searchParams.get('color');
     // Check if hexcode is provided in the query parameters
     if (urlColor) {
