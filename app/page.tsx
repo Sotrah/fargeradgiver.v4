@@ -13,7 +13,8 @@ import CldImage from "../components/CldImage";
 import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
-import { useSearchParams } from "next/navigation"
+import GetUrlColor from "@/components/GetUrlColor";
+
 
 
 export default function Home() {
@@ -58,32 +59,17 @@ export default function Home() {
   }
   const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
 
-  // Select color from URL if one is present
-  const searchParams = useSearchParams();
   
-  useEffect(() => { 
-    if (colorsAreLoaded) {
-        const urlColor = searchParams.get('color');
-        // Check if hexcode is provided in the query parameters
-        if (urlColor) {
-            const urlHexCode = "#" + urlColor;
-            console.log("Hexcode from url: " + urlHexCode);
-            // Find the color with the provided hexcode
-            const urlColorObject = searchResults.find((color) => color.hex === urlHexCode);
-            // If the color is found, set it as the selected color
-            if (urlColorObject) {
-                handleColorSelect(urlColorObject);
-                console.log("URL color found: " + urlColorObject.shortName);
-            }
-            else {
-                console.log("URL color not found");
-            }
-        }
-    }
-}, [colorsAreLoaded, searchResults, searchParams]);
 
   return (
     <FavoriteColorContext.Provider value={{ favoriteColors, setFavoriteColors }}>
+        <Suspense fallback={<div>Loading...</div>}>
+            <GetUrlColor onColorSelect={handleColorSelect}
+                        handleColorSelect={handleColorSelect}
+                        selectedColor={selectedColor}
+                        colors={searchResults}
+                        colorsAreLoaded={colorsAreLoaded}/>
+        </Suspense>
         
       <div className="bg-jernia-nettside new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
 
