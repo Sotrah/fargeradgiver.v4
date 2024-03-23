@@ -77,10 +77,9 @@ export default function Home() {
             console.log("URL color not found");
         }
     }
-}, [colors, urlColor]);
+}, [colors, urlColor, searchParams]);
 
   return (
-    <Suspense>
     <FavoriteColorContext.Provider value={{ favoriteColors, setFavoriteColors }}>
         
       <div className="bg-jernia-nettside new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
@@ -259,6 +258,5 @@ export default function Home() {
         </div>
       </div>
     </FavoriteColorContext.Provider>
-    </Suspense>
   );
 }
