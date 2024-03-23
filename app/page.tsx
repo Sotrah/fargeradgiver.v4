@@ -15,6 +15,7 @@ import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
+export const dynamic = 'force-dynamic'
 export default function Home() {
 
   const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
