@@ -5,7 +5,7 @@ import FavoriteColorPicker from "../components/FavoriteColorPicker";
 import { FavoriteColorContext } from "@/components/FavoriteColorContext";
 import {ColorType} from "@/components/ColorType";
 import ImageGridCard from "@/components/ImageGridCard";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, Suspense} from "react";
 import {formatHexColor, mapHitsToColorType} from "@/components/Utils";
 import {useSpinDelay} from "spin-delay";
 import {ScaleLoader} from "react-spinners";
@@ -14,7 +14,7 @@ import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-export const dynamic = 'force-dynamic'
+
 export default function Home() {
 
   const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
@@ -57,8 +57,9 @@ export default function Home() {
 
   // Select color from URL if one is present
   const searchParams = useSearchParams();
+  const urlColor = searchParams.get('color');
+
   useEffect(() => { 
-    const urlColor = searchParams.get('color');
     // Check if hexcode is provided in the query parameters
     if (urlColor) {
         const urlHexCode = "#" + urlColor;
@@ -75,10 +76,11 @@ export default function Home() {
             console.log("URL color not found");
         }
     }
-}, [searchParams]);
+}, [searchParams, colors]);
 
   return (
     <FavoriteColorContext.Provider value={{ favoriteColors, setFavoriteColors }}>
+        
       <div className="bg-jernia-nettside new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
 
         {/*Navbar*/}
