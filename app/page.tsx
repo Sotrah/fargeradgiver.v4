@@ -57,7 +57,7 @@ export default function Home() {
   const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
 
   // Select color from URL if one is present
-//   const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
 //   const urlColor = searchParams.get('color');
 
 //   useEffect(() => { 
