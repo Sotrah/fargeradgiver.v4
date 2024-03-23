@@ -76,7 +76,7 @@ export default function Home() {
             console.log("URL color not found");
         }
     }
-}, [searchParams, colors]);
+}, [colors, urlColor]);
 
   return (
     <FavoriteColorContext.Provider value={{ favoriteColors, setFavoriteColors }}>
