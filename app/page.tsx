@@ -13,13 +13,9 @@ import CldImage from "../components/CldImage";
 import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
 export default function Home() {
-    // type CloudinaryResult = {
-    //   width: number;
-    //   height: number;
-    //   public_id: string;
-    // };
 
   const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
   const [favoriteColors, setFavoriteColors] = useState<ColorType[]>([]);
@@ -36,10 +32,9 @@ export default function Home() {
     if (searchResults.length !== convertedResults.length || !convertedResults.every((result, index) => result.code === searchResults[index]?.code)) {
       setSearchResults(convertedResults); // Update state with converted results
     }
-  };
+  };   
 
 // Function to check if two arrays are equal
-
 
   useEffect(() => {
     setColors(colours_dump);
@@ -60,7 +55,26 @@ export default function Home() {
   }
   const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
 
-
+  const searchParams = useSearchParams();
+    useEffect(() => { 
+        const urlColor = searchParams.get('color');
+        // Check if hexcode is provided in the query parameters
+        if (urlColor) {
+            const urlHexCode = "#" + urlColor;
+            console.log("Hexcode from url: " + urlHexCode);
+            // Find the color with the provided hexcode
+            const urlColorObject = colors.find((color) => color.hex === urlHexCode);
+            console.log(urlColorObject);
+            // If the color is found, set it as the selected color
+            if (urlColorObject) {
+                handleColorSelect(urlColorObject);
+                console.log("URL color found: " + urlColorObject.shortName);
+            }
+            else {
+                console.log("URL color not found");
+            }
+        }
+        }, [searchParams]);
 
   return (
     <FavoriteColorContext.Provider value={{ favoriteColors, setFavoriteColors }}>
