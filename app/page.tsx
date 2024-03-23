@@ -26,7 +26,7 @@ export default function Home() {
   const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
   const [visibleModule, setVisibleModule] = useState("modul2");
   const [loading, setLoading] = useState(false);
-  const [imageToTransform, setImageToTransform] = useState<String | null>('http://res.cloudinary.com/dj6mfsxnu/image/upload/v1707474684/jgxom27mvriax5av0prr.png');
+  const [imageToTransform, setImageToTransform] = useState<String | null>('https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711181504/e5rhfxd4qbo6a2irtfqn.jpg');
   const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
   const [searchResults, setSearchResults] = useState<ColorType[]>([]);
 
@@ -53,7 +53,9 @@ export default function Home() {
   }
 
   const handleColorSelect = (selectedColor: ColorType | null) => {
-    setLoading(true);
+    if (selectedColor != null) {
+        setLoading(true);
+    }
     setSelectedColor(selectedColor)
   }
   const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
@@ -107,10 +109,10 @@ export default function Home() {
                         </div>
                     )}
                     {/* The below section is dimmed until the image is loaded */}
-                    <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full`}>
+                    <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full relative`}>
                         {/* CldImage is documented here: https://next.cloudinary.dev/cldimage/configuration
                         If there is an image and a selectedColor selected, transform it with Recolor */}
-                        <div className="flex justify-center items-center z-10">
+                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-10">
                             {imageToTransform && selectedColor && (
                                 <CldImage
                                     placeholder="empty"
@@ -125,11 +127,15 @@ export default function Home() {
                                 />
                             )}
                         </div>
-                        <div className="flex justify-center items-center z-0">
-                            {imageToTransform && !selectedColor && (
+                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-0">
+                            {imageToTransform &&(
                                 <CldImage
                                     placeholder="empty"
-                                    onLoad={() => setLoading(false)}
+                                    onLoad={() => 
+                                        {if (!selectedColor) {
+                                            setLoading(false)}
+                                        }
+                                    }
                                     width='1024'
                                     height='1024'
                                     src={imageToTransform}
@@ -220,7 +226,7 @@ export default function Home() {
 
                         {/*Nylig brukte farger*/}
                         <div className={`${visibleModule === "modul3" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
-                            <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
+                            <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} visibleModule={visibleModule}/>
                         </div>
 
                         {/*Favoritte farger*/}
