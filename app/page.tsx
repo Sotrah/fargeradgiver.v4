@@ -26,12 +26,14 @@ export default function Home() {
   const [imageToTransform, setImageToTransform] = useState<String | null>('https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711181504/e5rhfxd4qbo6a2irtfqn.jpg');
   const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
   const [searchResults, setSearchResults] = useState<ColorType[]>([]);
+  const[colorsAreLoaded, setColorsAreLoaded] = useState(false);
 
   const handleResultsUpdate = (hits: HitProps[]) => {
     // Convert HitProps[] to ColorType[]
     const convertedResults = mapHitsToColorType(hits);
     if (searchResults.length !== convertedResults.length || !convertedResults.every((result, index) => result.code === searchResults[index]?.code)) {
       setSearchResults(convertedResults); // Update state with converted results
+      setColorsAreLoaded(true);
     }
   };   
 
@@ -58,26 +60,27 @@ export default function Home() {
 
   // Select color from URL if one is present
   const searchParams = useSearchParams();
-//   const urlColor = searchParams.get('color');
-
-//   useEffect(() => { 
-//     // Check if hexcode is provided in the query parameters
-//     if (urlColor) {
-//         const urlHexCode = "#" + urlColor;
-//         console.log("Hexcode from url: " + urlHexCode);
-//         // Find the color with the provided hexcode
-//         const urlColorObject = colors.find((color) => color.hex === urlHexCode);
-//         console.log(urlColorObject);
-//         // If the color is found, set it as the selected color
-//         if (urlColorObject) {
-//             handleColorSelect(urlColorObject);
-//             console.log("URL color found: " + urlColorObject.shortName);
-//         }
-//         else {
-//             console.log("URL color not found");
-//         }
-//     }
-// }, [colors, urlColor, searchParams]);
+  
+  useEffect(() => { 
+    if (colorsAreLoaded) {
+        const urlColor = searchParams.get('color');
+        // Check if hexcode is provided in the query parameters
+        if (urlColor) {
+            const urlHexCode = "#" + urlColor;
+            console.log("Hexcode from url: " + urlHexCode);
+            // Find the color with the provided hexcode
+            const urlColorObject = searchResults.find((color) => color.hex === urlHexCode);
+            // If the color is found, set it as the selected color
+            if (urlColorObject) {
+                handleColorSelect(urlColorObject);
+                console.log("URL color found: " + urlColorObject.shortName);
+            }
+            else {
+                console.log("URL color not found");
+            }
+        }
+    }
+}, [colorsAreLoaded, searchResults, searchParams]);
 
   return (
     <FavoriteColorContext.Provider value={{ favoriteColors, setFavoriteColors }}>
