@@ -49,6 +49,9 @@ export default function Home() {
       setLoading(true);
       setImageToTransform(selectedPicture)
     }
+    else {
+      setSelectedColor(null);
+    }
   }
 
   const handleColorSelect = (selectedColor: ColorType | null) => {
