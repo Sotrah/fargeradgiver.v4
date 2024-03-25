@@ -14,6 +14,7 @@ import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
 import GetUrlColor from "@/components/GetUrlColor";
+import PromptRecolor from "@/components/PromptOptions"; // Adjust the path as necessary
 import ChosenColorInfo from "@/components/ChosenColorInfo";
 
 
@@ -28,6 +29,7 @@ export default function Home() {
   const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
   const [searchResults, setSearchResults] = useState<ColorType[]>([]);
   const[colorsAreLoaded, setColorsAreLoaded] = useState(false);
+  const [recolorOption, setRecolorOption] = useState("All the walls and every wall"); // Default value can be adjusted
 
   const handleResultsUpdate = (hits: HitProps[]) => {
     // Convert HitProps[] to ColorType[]
@@ -131,7 +133,7 @@ export default function Home() {
                                     alt="Uploaded image"
                                     className="rounded-md"
                                     sizes="100vw"
-                                    recolor={['every wall and walls', formattedHex]}
+                                    recolor={[`${recolorOption}`, formattedHex]}
                                 />
                             )}
                         </div>
@@ -159,8 +161,29 @@ export default function Home() {
 
 
                 {/*Info om valgt farge*/}
-                <div className="lg:col-span-5 lg:row-span-1 lg:order-5 rounded-lg bg-white px-3 py-3 flex items-center justify-center h-full">
-                    <ChosenColorInfo selectedColor={selectedColor} formattedHex={formattedHex}/>
+                <div className="lg:col-span-5 lg:row-span-1 lg:order-5  rounded-lg bg-white px-3 py-3">
+                    {selectedColor && (
+                        <div style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
+                            <div style={{
+                                backgroundColor: `#${formattedHex}`,
+                                width: '60px',
+                                height: '60px',
+                                borderRadius: '8px',
+                            }}>
+                                <img src="/jernia-paint-blob.png" alt="Paint blob"/>
+                            </div>
+                            <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                                <span className="colorName">{selectedColor.fullName}</span>
+                                <span className="colorCode">{selectedColor.ncsCode}</span>
+                            </div>
+                            <div>
+                                <button
+                                    className="px-6 xl:px-10 lg:px-2 py-1 md:py-2 bg-green-500 hover:bg-green-700 text-white rounded">
+                                    Kjøp
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
 
@@ -170,7 +193,7 @@ export default function Home() {
                     <div className="w-full">
                         {/*Tabs for fargevalg*/}
                         <div
-                            className="flex-grow text-center xl:text-lg lg:text-xs text-md flex justify-between sticky top-0 z-10 bg-jernia-nettside pb-2">
+                            className="flex-grow text-center xl:text-md lg:text-xs text-md flex justify-between sticky top-0 z-10 bg-jernia-nettside pb-2">
                             <button
                                 style={{
                                     borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
@@ -201,7 +224,7 @@ export default function Home() {
                         </div>
 
                         {/*Søkebar og Fargevelger*/}
-                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '6 / 10' }}>
+                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '7 / 10' }}>
                             <div>
                                 <Search onResultsUpdate={handleResultsUpdate}/>
 
@@ -216,7 +239,7 @@ export default function Home() {
                             <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} visibleModule={visibleModule}/>
                         </div>
 
-                        {/*Favoritte farger*/}
+                        {/*Favorittfarger*/}
                         <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full favorite-color-picker flex-grow`}>
                             <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} favoriteColors={favoriteColors}/>
                         </div>   

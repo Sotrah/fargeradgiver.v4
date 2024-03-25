@@ -1,6 +1,6 @@
 'use client';
 import CloudinaryWrapper from "./CldImage";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import UploadButton from "../components/UploadButton";
 
 // Define the type for the component props
