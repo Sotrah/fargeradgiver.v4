@@ -19,17 +19,17 @@
 
 /* Basisinnstillinger marger */
 .main-container {
-  margin: 4px;
+  margin: 0.01rem;
 }
 
 /* For skjermer større enn 1292px */
-@media (min-width: 1550px) {
+@media (min-width: 1024px) {
   .main-container{
     margin-left: auto;
     margin-right: auto;
-    max-width: 2400px;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    max-width: 1340px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
