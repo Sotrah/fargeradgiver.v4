@@ -25,7 +25,7 @@ const CustomResultsComponent: React.FC<CustomResultsProps> = ({searchResults, on
 const CustomResults = connectStateResults(CustomResultsComponent);
 
 
-const searchClient = algoliasearch('NOLK3JAMLX', 'fcde24d65b04aa23920ceb878b4362d9');
+const searchClient = algoliasearch('NOLK3JAMLX', 'fcde24d65b04aa23920ceb878b4362d9'); //Search-Only API key, Lite sikkerhetsfare
 
 interface SearchProps {
     onResultsUpdate: (hits: HitProps[]) => void;
@@ -45,13 +45,15 @@ export const Search: React.FC<SearchProps> = ({ onResultsUpdate }) => {
             <SearchBox translations={{ placeholder: 'Søk her' }}/>
                 </div>
 
-            <button onClick={toggleCollapse} className="text-sm lg:text-xs xl:text-sm border-2 bg-white">
+            <button onClick={toggleCollapse} className="text-sm lg:text-xs xl:text-sm border-2 bg-white hover:border-gray-500">
                 {isCollapsed ? 'Vis filter' : 'Gjem filter'}
             </button>
 
             {/* Always render the RefinementList, but control its visibility with a CSS class */}
+                <div className="col-span-3">
             <div className={isCollapsed ? 'hidden' : ''}>
                 <RefinementList attribute="collections.name"/>
+            </div>
             </div>
             </div>
 
