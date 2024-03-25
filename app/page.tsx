@@ -38,8 +38,6 @@ export default function Home() {
     }
   };   
 
-// Function to check if two arrays are equal
-
   useEffect(() => {
     setColors(colours_dump);
   }, []);
