@@ -12,11 +12,12 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
     const [selected, setSelected] = useState<number>(0);
 
     const [images, setImages] = useState<string[]>([
-        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711181504/e5rhfxd4qbo6a2irtfqn.jpg',
-        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711181537/oqa7u4fxuyknbxyfxn9a.jpg',
-        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711181638/haxttwqwqq11kz8hmys8.jpg',
+        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364452/qrkelyfikaa03biiaedn.jpg',
+        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364598/dc3x1mvacxdq8qc7kk80.jpg',
+        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364668/jycc1koodetkfjvdcoky.jpg',
     ]);
-
+    
+    
     const handleImageClick = (index: number): void => {
         setSelected(index);
         console.log("Selected image: " + images[index]);
