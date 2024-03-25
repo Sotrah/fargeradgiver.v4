@@ -70,7 +70,7 @@ export default function Home() {
             <GetUrlColor onColorSelect={handleColorSelect}
                         handleColorSelect={handleColorSelect}
                         selectedColor={selectedColor}
-                        colors={searchResults}
+                        colors={colors}
                         colorsAreLoaded={colorsAreLoaded}/>
         </Suspense>
         
