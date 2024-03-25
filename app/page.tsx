@@ -108,7 +108,7 @@ export default function Home() {
                 </div>
 
                 {/*Hovedbildet */}
-                <div className="lg:col-span-5 lg:row-span-3 lg:order-2 "style={{ aspectRatio: '5 / 4', overflow: 'hidden', borderRadius: '6px' }}>
+                <div className="lg:col-span-5 lg:row-span-3 lg:order-2 "style={{ aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '6px' }}>
                     {showSpinner && (
                         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-20">
                             <ScaleLoader
