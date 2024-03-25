@@ -1,6 +1,5 @@
 import React from 'react';
 import { ColorType } from "@/components/ColorType";
-import colours_dump from "colours_dump.json"
 import ColorCard from "@/components/ColorCard";
 
 const ColorPicker: React.FC<{

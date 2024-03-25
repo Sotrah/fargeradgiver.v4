@@ -13,8 +13,9 @@ import CldImage from "../components/CldImage";
 import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
-import colorPicker from "../components/ColorPicker";
 import GetUrlColor from "@/components/GetUrlColor";
+import PromptRecolor from "@/components/PromptOptions"; // Adjust the path as necessary
+import ChosenColorInfo from "@/components/ChosenColorInfo";
 
 
 export default function Home() {
@@ -24,10 +25,11 @@ export default function Home() {
   const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
   const [visibleModule, setVisibleModule] = useState("modul2");
   const [loading, setLoading] = useState(false);
-  const [imageToTransform, setImageToTransform] = useState<String | null>('https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711181504/e5rhfxd4qbo6a2irtfqn.jpg');
+  const [imageToTransform, setImageToTransform] = useState<String | null>('https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364452/qrkelyfikaa03biiaedn.jpg');
   const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
   const [searchResults, setSearchResults] = useState<ColorType[]>([]);
   const[colorsAreLoaded, setColorsAreLoaded] = useState(false);
+  const [recolorOption, setRecolorOption] = useState("All the walls and every wall"); // Default value can be adjusted
 
   const handleResultsUpdate = (hits: HitProps[]) => {
     // Convert HitProps[] to ColorType[]
@@ -37,8 +39,6 @@ export default function Home() {
       setColorsAreLoaded(true);
     }
   };   
-
-// Function to check if two arrays are equal
 
   useEffect(() => {
     setColors(colours_dump);
@@ -70,7 +70,7 @@ export default function Home() {
             <GetUrlColor onColorSelect={handleColorSelect}
                         handleColorSelect={handleColorSelect}
                         selectedColor={selectedColor}
-                        colors={searchResults}
+                        colors={colors}
                         colorsAreLoaded={colorsAreLoaded}/>
         </Suspense>
         
@@ -133,7 +133,7 @@ export default function Home() {
                                     alt="Uploaded image"
                                     className="rounded-md"
                                     sizes="100vw"
-                                    recolor={['every wall and walls', formattedHex]}
+                                    recolor={[`${recolorOption}`, formattedHex]}
                                 />
                             )}
                         </div>
@@ -161,29 +161,10 @@ export default function Home() {
 
 
                 {/*Info om valgt farge*/}
-                <div className="lg:col-span-5 lg:row-span-1 lg:order-5 rounded-lg bg-white py-2 px-2"style={{height: '80px' }} >
-                    {selectedColor && (
-                        <div style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
-                            <div style={{
-                                backgroundColor: `#${formattedHex}`,
-                                width: '60px',
-                                height: '60px',
-                                borderRadius: '8px',
-                            }}>
-                                <img src="/jernia-paint-blob.png" alt="Paint blob"/>
-                            </div>
-                            <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                                <span className="colorName">{selectedColor.fullName}</span>
-                                <span className="colorCode">{selectedColor.ncsCode}</span>
-                            </div>
-                            <div>
-                                <button
-                                    className="px-6 xl:px-10 lg:px-2 py-1 md:py-2 bg-green-500 hover:bg-green-700 text-white rounded">
-                                    Kjøp
-                                </button>
-                            </div>
-                        </div>
-                    )}
+
+                <div className="lg:col-span-5 lg:row-span-1 lg:order-5  rounded-lg bg-white px-3 py-3 flex items-center justify-center h-full">
+                    <ChosenColorInfo selectedColor={selectedColor} formattedHex={formattedHex}/>
+
                 </div>
 
 

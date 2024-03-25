@@ -1,5 +1,5 @@
 import { ColorType } from "@/components/ColorType";
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { FavoriteColorContext, FavoriteColorContextType } from './FavoriteColorContext';
 
 interface ColorCardProps {
@@ -30,7 +30,7 @@ const ColorCard: React.FC<ColorCardProps> = ({ colorItem, handleColorClick, sele
         }
     };
 
-    
+
 
     return (
         <div className={`w-full overflow-hidden rounded-lg border-2 relative hover:border-gray-500 ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-lightgray'}`} style={{ paddingBottom: '100%' }}>
@@ -44,7 +44,7 @@ const ColorCard: React.FC<ColorCardProps> = ({ colorItem, handleColorClick, sele
                 aria-label={`Favorite ${colorItem.shortName}`}
             >
                 <svg className={`opacity-50 w-full h-full stroke-1 stroke-black fill-current hover:fill-gray-700 ${favoriteColors.includes(colorItem) ? 'fill-black' : 'fill-transparent'}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    
+
                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                 </svg>
             </button>

@@ -42,7 +42,7 @@ export const Search: React.FC<SearchProps> = ({ onResultsUpdate }) => {
 
             <div className="grid grid-cols-4 gap-2">
                 <div className="col-span-3">
-            <SearchBox/>
+            <SearchBox translations={{ placeholder: 'Søk her' }}/>
                 </div>
 
             <button onClick={toggleCollapse} className="text-sm lg:text-xs xl:text-sm border-2 bg-white hover:border-gray-500">
