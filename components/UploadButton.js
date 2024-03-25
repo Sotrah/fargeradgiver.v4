@@ -24,7 +24,7 @@ const UploadButton = ({ onUploadSuccess }) => {
         autoMinimize: true,
         cropping: true,
         showSkipCropButton: false,
-        croppingAspectRatio: 1,
+        croppingAspectRatio: 1.2,
         theme: 'minimal',
         language: "no",
         text: {

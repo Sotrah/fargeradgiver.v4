@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ColorType } from "@/components/ColorType";
+import ColorCard from "@/components/ColorCard";
 
-const RecentColorPicker: React.FC<{ selectedColor: ColorType | null, onColorSelect: (color: ColorType | null) => void }> = ({ selectedColor, onColorSelect }) => {
+const RecentColorPicker: React.FC<{ selectedColor: ColorType | null, visibleModule: String, onColorSelect: (color: ColorType | null) => void }> = ({ selectedColor, onColorSelect, visibleModule }) => {
 
     const [recentColors, setRecentColors] = useState<ColorType[]>([]);
 
@@ -15,7 +16,15 @@ const RecentColorPicker: React.FC<{ selectedColor: ColorType | null, onColorSele
         if (!recentColors.includes(selectedColor)) {
             setRecentColors((prevColors: ColorType[]) => [selectedColor, ...prevColors]);
                 console.log('Recent colors:', recentColors);
-        }  
+        }
+        // if the recent colors tab isn't open, move the selected color to the front of the recently used list
+        else if (visibleModule !== 'modul3')  {
+            setRecentColors((prevColors: ColorType[]) => {
+                const updatedColors = prevColors.filter(color => color !== selectedColor);
+                console.log('Moved color to front of recent colors:', recentColors);
+                return [selectedColor, ...updatedColors];
+            });
+        }
     }
 
     const handleColorClick = (colorItem: ColorType) => {
@@ -32,15 +41,9 @@ const RecentColorPicker: React.FC<{ selectedColor: ColorType | null, onColorSele
     };
 
     return (
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid grid-cols-3 gap-4 lg:gap-2 xl:gap-4 mt-6">
             {recentColors.map((colorItem, index) => (
-                <div
-                    key={index}
-                    className={`w-full rounded-lg flex items-center justify-center overflow-hidden relative border-2 ${selectedColor?.hex === colorItem.hex ? 'border-black' : 'border-transparent'} hover:border-gray-500`}
-                    style={{ backgroundColor: colorItem.hex, aspectRatio: '1/1' }} 
-                    onClick={() => handleColorClick(colorItem)}
-                > 
-                </div>
+                <ColorCard key={index} colorItem={colorItem} handleColorClick={handleColorClick} selectedColor={selectedColor} />
             ))}
         </div>
     );

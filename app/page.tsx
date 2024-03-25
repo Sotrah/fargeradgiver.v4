@@ -1,10 +1,11 @@
-"use client";
+"use client"
 import ColorPicker from "../components/ColorPicker";
 import RecentColorPicker from "../components/RecentColorPicker";
 import FavoriteColorPicker from "../components/FavoriteColorPicker";
+import { FavoriteColorContext } from "@/components/FavoriteColorContext";
 import {ColorType} from "@/components/ColorType";
 import ImageGridCard from "@/components/ImageGridCard";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, Suspense} from "react";
 import {formatHexColor, mapHitsToColorType} from "@/components/Utils";
 import {useSpinDelay} from "spin-delay";
 import {ScaleLoader} from "react-spinners";
@@ -13,32 +14,31 @@ import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
 import colorPicker from "../components/ColorPicker";
+import GetUrlColor from "@/components/GetUrlColor";
+
 
 export default function Home() {
-    // type CloudinaryResult = {
-    //   width: number;
-    //   height: number;
-    //   public_id: string;
-    // };
 
   const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
+  const [favoriteColors, setFavoriteColors] = useState<ColorType[]>([]);
   const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
   const [visibleModule, setVisibleModule] = useState("modul2");
   const [loading, setLoading] = useState(false);
-  const [imageToTransform, setImageToTransform] = useState<String | null>('http://res.cloudinary.com/dj6mfsxnu/image/upload/v1707474684/jgxom27mvriax5av0prr.png');
+  const [imageToTransform, setImageToTransform] = useState<String | null>('https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711181504/e5rhfxd4qbo6a2irtfqn.jpg');
   const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
   const [searchResults, setSearchResults] = useState<ColorType[]>([]);
+  const[colorsAreLoaded, setColorsAreLoaded] = useState(false);
 
   const handleResultsUpdate = (hits: HitProps[]) => {
     // Convert HitProps[] to ColorType[]
     const convertedResults = mapHitsToColorType(hits);
     if (searchResults.length !== convertedResults.length || !convertedResults.every((result, index) => result.code === searchResults[index]?.code)) {
       setSearchResults(convertedResults); // Update state with converted results
+      setColorsAreLoaded(true);
     }
-  };
+  };   
 
 // Function to check if two arrays are equal
-
 
   useEffect(() => {
     setColors(colours_dump);
@@ -49,17 +49,31 @@ export default function Home() {
       setLoading(true);
       setImageToTransform(selectedPicture)
     }
+    else {
+      setSelectedColor(null);
+    }
   }
 
   const handleColorSelect = (selectedColor: ColorType | null) => {
-    setLoading(true);
+    if (selectedColor != null) {
+        setLoading(true);
+    }
     setSelectedColor(selectedColor)
   }
   const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
 
-
+  
 
   return (
+    <FavoriteColorContext.Provider value={{ favoriteColors, setFavoriteColors }}>
+        <Suspense fallback={<div>Loading...</div>}>
+            <GetUrlColor onColorSelect={handleColorSelect}
+                        handleColorSelect={handleColorSelect}
+                        selectedColor={selectedColor}
+                        colors={searchResults}
+                        colorsAreLoaded={colorsAreLoaded}/>
+        </Suspense>
+        
       <div className="bg-jernia-nettside new-style page-proxiedContentWrapper pageType-ContentPage template-pages-layout-landingLayout2Page pageLabel-proxiedContentWrapper smartedit-page-uid-proxiedContentWrapper smartedit-page-uuid-eyJpdGVtSWQiOiJwcm94aWVkQ29udGVudFdyYXBwZXIiLCJjYXRhbG9nSWQiOiJjbkNvbnRlbnRDYXRhbG9nIiwiY2F0YWxvZ1ZlcnNpb24iOiJPbmxpbmUifQ== smartedit-catalog-version-uuid-cnContentCatalog/Online language-no">
 
         {/*Navbar*/}
@@ -105,10 +119,10 @@ export default function Home() {
                         </div>
                     )}
                     {/* The below section is dimmed until the image is loaded */}
-                    <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full`}>
+                    <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full relative`}>
                         {/* CldImage is documented here: https://next.cloudinary.dev/cldimage/configuration
                         If there is an image and a selectedColor selected, transform it with Recolor */}
-                        <div className="flex justify-center items-center z-10">
+                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-10">
                             {imageToTransform && selectedColor && (
                                 <CldImage
                                     placeholder="empty"
@@ -123,11 +137,15 @@ export default function Home() {
                                 />
                             )}
                         </div>
-                        <div className="flex justify-center items-center z-0">
-                            {imageToTransform && !selectedColor && (
+                        <div className=" flex justify-center items-center z-0">
+                            {imageToTransform &&(
                                 <CldImage
                                     placeholder="empty"
-                                    onLoad={() => setLoading(false)}
+                                    onLoad={() => 
+                                        {if (!selectedColor) {
+                                            setLoading(false)}
+                                        }
+                                    }
                                     width='1024'
                                     height='1024'
                                     src={imageToTransform}
@@ -152,6 +170,7 @@ export default function Home() {
                                 height: '60px',
                                 borderRadius: '8px',
                             }}>
+                                <img src="/jernia-paint-blob.png" alt="Paint blob"/>
                             </div>
                             <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                                 <span className="colorName">{selectedColor.fullName}</span>
@@ -172,75 +191,64 @@ export default function Home() {
                 {/*Siste kolonne på desktopview*/}
                 <div className="lg:col-span-3 lg:row-span-4 lg:order-3">
                     <div className="w-full">
-                            {/*Tabs for fargevalg*/}
-                            <div
-                                className="flex-grow text-center xl:text-lg lg:text-xs text-md flex justify-between sticky top-0 z-10 bg-jernia-nettside pb-2">
-                                <button
-                                    style={{
-                                        borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
-                                        fontWeight: visibleModule === "modul2" ? "bold" : "",
-                                        color: visibleModule === "modul2" ? "black" : "gray"
-                                    }}
-                                    onClick={() => setVisibleModule("modul2")}>
-                                    Finn en farge
-                                </button>
-                                <button
-                                    style={{
-                                        borderBottom: visibleModule === "modul3" ? "4px solid blue" : "",
-                                        fontWeight: visibleModule === "modul3" ? "bold" : "",
-                                        color: visibleModule === "modul3" ? "black" : "gray"
-                                    }}
-                                    onClick={() => setVisibleModule("modul3")}>
-                                    Nylig brukt
-                                </button>
-                                <button
-                                    style={{
-                                        borderBottom: visibleModule === "modul4" ? "4px solid blue" : "",
-                                        fontWeight: visibleModule === "modul4" ? "bold" : "",
-                                        color: visibleModule === "modul4" ? "black" : "gray"
-                                    }}
-                                    onClick={() => setVisibleModule("modul4")}>
-                                    Dine favoritter
-                                </button>
-                            </div>
-
-
-
-                            {/*Søkebar */}
-                            <div className="flex-grow overflow-y-scroll"style={{ aspectRatio: '6 / 10' }}>
-                                {visibleModule === "modul2" && (
-
-                                    <div>
-                                        <Search onResultsUpdate={handleResultsUpdate}/>
-
-                                        <ColorPicker onColorSelect={handleColorSelect}
-                                                     selectedColor={selectedColor}
-                                                     colors={searchResults}/>
-                                    </div>
-                                )}
-                            </div>
-
-                            {/*Fargevelger*/}
-                            <div className={`${visibleModule === "modul2" ? "" : "hidden"} w-full h-full color-picker flex-grow`}>
-                                <ColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-                            </div>
-
-                            {/*Nylig brukte farger*/}
-                            <div className={`${visibleModule === "modul3" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
-                                <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-                            </div>
-
-                            {/*Favoritte farger*/}
-                            <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
-                                <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor}/>
-                            </div>
-                            
+                        {/*Tabs for fargevalg*/}
+                        <div
+                            className="flex-grow text-center xl:text-lg lg:text-xs text-md flex justify-between sticky top-0 z-10 bg-jernia-nettside pb-2">
+                            <button
+                                style={{
+                                    borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
+                                    fontWeight: visibleModule === "modul2" ? "bold" : "",
+                                    color: visibleModule === "modul2" ? "black" : "gray"
+                                }}
+                                onClick={() => setVisibleModule("modul2")}>
+                                Finn en farge
+                            </button>
+                            <button
+                                style={{
+                                    borderBottom: visibleModule === "modul3" ? "4px solid blue" : "",
+                                    fontWeight: visibleModule === "modul3" ? "bold" : "",
+                                    color: visibleModule === "modul3" ? "black" : "gray"
+                                }}
+                                onClick={() => setVisibleModule("modul3")}>
+                                Nylig brukt
+                            </button>
+                            <button
+                                style={{
+                                    borderBottom: visibleModule === "modul4" ? "4px solid blue" : "",
+                                    fontWeight: visibleModule === "modul4" ? "bold" : "",
+                                    color: visibleModule === "modul4" ? "black" : "gray"
+                                }}
+                                onClick={() => setVisibleModule("modul4")}>
+                                Dine favoritter
+                            </button>
                         </div>
+
+                        {/*Søkebar og Fargevelger*/}
+                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '6 / 10' }}>
+                            <div>
+                                <Search onResultsUpdate={handleResultsUpdate}/>
+
+                                <ColorPicker onColorSelect={handleColorSelect}
+                                                selectedColor={selectedColor}
+                                                colors={searchResults}/>
+                            </div>
                         </div>
+
+                        {/*Nylig brukte farger*/}
+                        <div className={`${visibleModule === "modul3" ? "" : "hidden"} w-full h-full recent-color-picker flex-grow`}>
+                            <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} visibleModule={visibleModule}/>
+                        </div>
+
+                        {/*Favoritte farger*/}
+                        <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full favorite-color-picker flex-grow`}>
+                            <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} favoriteColors={favoriteColors}/>
+                        </div>   
+                    </div>
+                </div>
 
             </div>
         </div>
       </div>
-  )
-      ;
+    </FavoriteColorContext.Provider>
+  );
 }
