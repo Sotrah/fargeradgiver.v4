@@ -58,7 +58,7 @@ const ColorCard: React.FC<ColorCardProps> = ({ colorItem, handleColorClick, sele
                 <div className="w-full h-2/3 flex items-center justify-center" style={{ backgroundColor: colorItem.hex }}>
                     <div className="w-3/4 h-3/4 rounded-lg" style={{ backgroundColor: colorItem.hex }}></div>
                 </div>
-                <div className="w-full h-1/3 flex items-center justify-center text-xs text-center" style={{ lineHeight: '1.2' }}>
+                <div className="w-full h-1/3 flex items-center justify-center text-xs text-center" style={{ lineHeight: '1' }}>
                     <span>{colorItem.shortName}</span>
                 </div>
             </button>

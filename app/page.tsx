@@ -161,7 +161,7 @@ export default function Home() {
 
 
                 {/*Info om valgt farge*/}
-                <div className="lg:col-span-5 lg:row-span-1 lg:order-5 rounded-lg bg-white ">
+                <div className="lg:col-span-5 lg:row-span-1 lg:order-5 rounded-lg bg-white py-2 px-2"style={{height: '80px' }} >
                     {selectedColor && (
                         <div style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
                             <div style={{
@@ -224,7 +224,7 @@ export default function Home() {
                         </div>
 
                         {/*Søkebar og Fargevelger*/}
-                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '7 / 10' }}>
+                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '45 / 69' }}>
                             <div>
                                 <Search onResultsUpdate={handleResultsUpdate}/>
 
