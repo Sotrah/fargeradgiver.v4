@@ -162,7 +162,7 @@ export default function Home() {
 
 
                 {/*Info om valgt farge*/}
-                <div className="lg:col-span-5 lg:row-span-1 lg:order-5  rounded-lg bg-white px-3 py-3">
+                <div className="lg:col-span-5 lg:row-span-1 lg:order-5 rounded-lg bg-white ">
                     {selectedColor && (
                         <div style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
                             <div style={{
@@ -194,7 +194,7 @@ export default function Home() {
                     <div className="w-full">
                         {/*Tabs for fargevalg*/}
                         <div
-                            className="flex-grow text-center xl:text-lg lg:text-xs text-md flex justify-between sticky top-0 z-10 bg-jernia-nettside pb-2">
+                            className="flex-grow text-center xl:text-md lg:text-xs text-md flex justify-between sticky top-0 z-10 bg-jernia-nettside pb-2">
                             <button
                                 style={{
                                     borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
@@ -225,7 +225,7 @@ export default function Home() {
                         </div>
 
                         {/*Søkebar og Fargevelger*/}
-                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '6 / 10' }}>
+                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '7 / 10' }}>
                             <div>
                                 <Search onResultsUpdate={handleResultsUpdate}/>
 
@@ -240,7 +240,7 @@ export default function Home() {
                             <RecentColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} visibleModule={visibleModule}/>
                         </div>
 
-                        {/*Favoritte farger*/}
+                        {/*Favorittfarger*/}
                         <div className={`${visibleModule === "modul4" ? "" : "hidden"} w-full h-full favorite-color-picker flex-grow`}>
                             <FavoriteColorPicker onColorSelect={handleColorSelect} selectedColor={selectedColor} favoriteColors={favoriteColors}/>
                         </div>   
