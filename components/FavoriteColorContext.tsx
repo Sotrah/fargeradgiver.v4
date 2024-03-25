@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import React, { createContext } from 'react';
 import {ColorType} from "@/components/ColorType";
 
 export interface FavoriteColorContextType {

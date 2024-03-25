@@ -13,8 +13,9 @@ import CldImage from "../components/CldImage";
 import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
-import colorPicker from "../components/ColorPicker";
+import colorPicker from "@/components/ColorPicker";
 import GetUrlColor from "@/components/GetUrlColor";
+import PromptRecolor from "@/components/PromptOptions"; // Adjust the path as necessary
 
 
 export default function Home() {
@@ -28,6 +29,7 @@ export default function Home() {
   const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
   const [searchResults, setSearchResults] = useState<ColorType[]>([]);
   const[colorsAreLoaded, setColorsAreLoaded] = useState(false);
+  const [recolorOption, setRecolorOption] = useState("All the walls and every wall"); // Default value can be adjusted
 
   const handleResultsUpdate = (hits: HitProps[]) => {
     // Convert HitProps[] to ColorType[]
@@ -93,6 +95,7 @@ export default function Home() {
                 Finn fargene som passer best til din stil og last opp bilde av rommet du vil male.
                 Etter at bildet er lastet opp kan du enkelt endre veggfargen til den fargen du ønsker.</p>
           </div>
+            <PromptRecolor selectedOption={recolorOption} onSelectOption={setRecolorOption} />
 
             {/*Div-container til hovedelementene*/}
             <div className="main-container grid grid-cols-1 lg:grid-cols-11 lg:grid-rows-4 space-y-6 lg:space-y-0 lg:gap-x-4 lg:gap-y-4">
@@ -133,7 +136,7 @@ export default function Home() {
                                     alt="Uploaded image"
                                     className="rounded-md"
                                     sizes="100vw"
-                                    recolor={['every wall and walls', formattedHex]}
+                                    recolor={[`${recolorOption}`, formattedHex]}
                                 />
                             )}
                         </div>
