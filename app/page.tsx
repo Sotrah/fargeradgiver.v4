@@ -13,8 +13,8 @@ import CldImage from "../components/CldImage";
 import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
+import colorPicker from "../components/ColorPicker";
 import GetUrlColor from "@/components/GetUrlColor";
-
 
 
 export default function Home() {
@@ -108,7 +108,7 @@ export default function Home() {
                 </div>
 
                 {/*Hovedbildet */}
-                <div className="lg:col-span-5 lg:row-span-3 lg:order-2">
+                <div className="lg:col-span-5 lg:row-span-3 lg:order-2 "style={{ aspectRatio: '5 / 4', overflow: 'hidden', borderRadius: '6px' }}>
                     {showSpinner && (
                         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-20">
                             <ScaleLoader
