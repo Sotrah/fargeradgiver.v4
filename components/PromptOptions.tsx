@@ -13,9 +13,9 @@ const PromptOptions = [
 
 const PromptRecolor: React.FC<PromptOptionsProps> = ({ selectedOption, onSelectOption }) => {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-row justify-start items-center">
             {PromptOptions.map((option) => (
-                <label key={option.value} className="inline-flex items-center mt-3">
+                <label key={option.value} className="inline-flex items-center mt-3 mr-4">
                     <input
                         type="radio"
                         className="form-radio h-5 w-5 text-gray-600"

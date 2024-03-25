@@ -4,6 +4,7 @@ import 'instantsearch.css/themes/satellite.css';
 import {Configure, InstantSearch, SearchBox, RefinementList, connectStateResults} from 'react-instantsearch-dom';
 import {HitProps} from "@/components/ColorSearchHit";
 import {SearchResults} from "algoliasearch-helper";
+import { searchBox } from 'instantsearch.js/es/widgets';
 
 interface CustomResultsProps{
     searchState: any;
@@ -38,7 +39,7 @@ export const Search: React.FC<SearchProps> = ({ onResultsUpdate }) => {
     return (
         <InstantSearch searchClient={searchClient} indexName="colours_dump">
             <Configure hitsPerPage={200}/>
-            <SearchBox/>
+            <SearchBox translations={{ placeholder: 'Søk her' }}/>
             <CustomResults onResultsUpdate={onResultsUpdate}/>
             <button onClick={toggleCollapse} style={{marginBottom: '10px'}}>
                 {isCollapsed ? 'Vis filtere' : 'Gjem filtere'}

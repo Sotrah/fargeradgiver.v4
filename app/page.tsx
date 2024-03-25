@@ -18,6 +18,7 @@ import GetUrlColor from "@/components/GetUrlColor";
 import PromptRecolor from "@/components/PromptOptions"; // Adjust the path as necessary
 
 
+
 export default function Home() {
 
   const [selectedColor, setSelectedColor] = useState<ColorType | null>(null);
@@ -39,8 +40,6 @@ export default function Home() {
       setColorsAreLoaded(true);
     }
   };   
-
-// Function to check if two arrays are equal
 
   useEffect(() => {
     setColors(colours_dump);
@@ -95,7 +94,6 @@ export default function Home() {
                 Finn fargene som passer best til din stil og last opp bilde av rommet du vil male.
                 Etter at bildet er lastet opp kan du enkelt endre veggfargen til den fargen du ønsker.</p>
           </div>
-            <PromptRecolor selectedOption={recolorOption} onSelectOption={setRecolorOption} />
 
             {/*Div-container til hovedelementene*/}
             <div className="main-container grid grid-cols-1 lg:grid-cols-11 lg:grid-rows-4 space-y-6 lg:space-y-0 lg:gap-x-4 lg:gap-y-4">
