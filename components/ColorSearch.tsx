@@ -38,15 +38,23 @@ export const Search: React.FC<SearchProps> = ({ onResultsUpdate }) => {
     return (
         <InstantSearch searchClient={searchClient} indexName="colours_dump">
             <Configure hitsPerPage={200}/>
-            <SearchBox/>
             <CustomResults onResultsUpdate={onResultsUpdate}/>
-            <button onClick={toggleCollapse} style={{marginBottom: '10px'}}>
-                {isCollapsed ? 'Vis filtere' : 'Gjem filtere'}
+
+            <div className="grid grid-cols-4 gap-2">
+                <div className="col-span-3">
+            <SearchBox/>
+                </div>
+
+            <button onClick={toggleCollapse} className="text-sm lg:text-xs xl:text-sm border-2 bg-white">
+                {isCollapsed ? 'Vis filter' : 'Gjem filter'}
             </button>
+
             {/* Always render the RefinementList, but control its visibility with a CSS class */}
             <div className={isCollapsed ? 'hidden' : ''}>
                 <RefinementList attribute="collections.name"/>
             </div>
+            </div>
+
         </InstantSearch>
     );
 };
