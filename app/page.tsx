@@ -13,10 +13,9 @@ import CldImage from "../components/CldImage";
 import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
-import colorPicker from "@/components/ColorPicker";
 import GetUrlColor from "@/components/GetUrlColor";
 import PromptRecolor from "@/components/PromptOptions"; // Adjust the path as necessary
-
+import ChosenColorInfo from "@/components/ChosenColorInfo";
 
 
 export default function Home() {
@@ -71,7 +70,7 @@ export default function Home() {
             <GetUrlColor onColorSelect={handleColorSelect}
                         handleColorSelect={handleColorSelect}
                         selectedColor={selectedColor}
-                        colors={searchResults}
+                        colors={colors}
                         colorsAreLoaded={colorsAreLoaded}/>
         </Suspense>
         
@@ -162,29 +161,10 @@ export default function Home() {
 
 
                 {/*Info om valgt farge*/}
-                <div className="lg:col-span-5 lg:row-span-1 lg:order-5 rounded-lg bg-white ">
-                    {selectedColor && (
-                        <div style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
-                            <div style={{
-                                backgroundColor: `#${formattedHex}`,
-                                width: '60px',
-                                height: '60px',
-                                borderRadius: '8px',
-                            }}>
-                                <img src="/jernia-paint-blob.png" alt="Paint blob"/>
-                            </div>
-                            <div style={{flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                                <span className="colorName">{selectedColor.fullName}</span>
-                                <span className="colorCode">{selectedColor.ncsCode}</span>
-                            </div>
-                            <div>
-                                <button
-                                    className="px-6 xl:px-10 lg:px-2 py-1 md:py-2 bg-green-500 hover:bg-green-700 text-white rounded">
-                                    Kjøp
-                                </button>
-                            </div>
-                        </div>
-                    )}
+
+                <div className="lg:col-span-5 lg:row-span-1 lg:order-5  rounded-lg bg-white px-3 py-3 flex items-center justify-center h-full">
+                    <ChosenColorInfo selectedColor={selectedColor} formattedHex={formattedHex}/>
+
                 </div>
 
 
@@ -225,7 +205,7 @@ export default function Home() {
                         </div>
 
                         {/*Søkebar og Fargevelger*/}
-                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '7 / 10' }}>
+                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll`} style={{ aspectRatio: '45 / 69' }}>
                             <div>
                                 <Search onResultsUpdate={handleResultsUpdate}/>
 

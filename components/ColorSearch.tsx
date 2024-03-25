@@ -45,13 +45,15 @@ export const Search: React.FC<SearchProps> = ({ onResultsUpdate }) => {
             <SearchBox translations={{ placeholder: 'Søk her' }}/>
                 </div>
 
-            <button onClick={toggleCollapse} className="text-sm lg:text-xs xl:text-sm border-2 bg-white">
+            <button onClick={toggleCollapse} className="text-sm lg:text-xs xl:text-sm border-2 bg-white hover:border-gray-500">
                 {isCollapsed ? 'Vis filter' : 'Gjem filter'}
             </button>
 
             {/* Always render the RefinementList, but control its visibility with a CSS class */}
+                <div className="col-span-3">
             <div className={isCollapsed ? 'hidden' : ''}>
                 <RefinementList attribute="collections.name"/>
+            </div>
             </div>
             </div>
 
