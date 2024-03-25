@@ -23,7 +23,8 @@ const ChosenColorInfo: React.FC<{
                             </div>
                             <div>
                                 <button
-                                    className="px-6 xl:px-10 lg:px-2 py-1 md:py-2 bg-green-500 hover:bg-green-700 text-white rounded">
+                                    className="px-6 xl:px-10 lg:px-2 py-1 md:py-2 bg-green-500 hover:bg-green-700 text-white rounded"
+                                    onClick={() => window.open(('https://www.jernia.no/farger/' + selectedColor.code), '_blank')}>
                                     Kjøp
                                 </button>
                             </div>
