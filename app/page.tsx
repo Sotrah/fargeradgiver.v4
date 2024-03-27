@@ -103,11 +103,11 @@ export default function Home() {
                   </svg>
                 </figure>
                 <input type="text" className="searchbar block w-full h-12 px-4 py-2 rounded-full border  bg-gray-50 focus:outline-none focus:border-blue-500 text-base" placeholder="Søk på jernia.no" />
-                <div className="flex items-center gap-5">
-                  <div className="w-12 h-12 bg-gray-100 rounded-full"></div>
-                  <div className="w-12 h-12 bg-gray-100 rounded-full"></div>
-                  <div className="w-12 h-12 bg-gray-100 rounded-full"></div>
-                  <div className="w-12 h-12 bg-gray-100 rounded-full"></div>
+                <div className="dummy-button-container flex items-center">
+                  <div className="dummy-button bg-gray-100 rounded-full"></div>
+                  <div className="dummy-button bg-gray-100 rounded-full"></div>
+                  <div className="dummy-button bg-gray-100 rounded-full"></div>
+                  <div className="dummy-button bg-gray-100 rounded-full"></div>
 
                   </div>
               </div>
