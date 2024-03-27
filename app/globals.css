@@ -90,20 +90,20 @@ body {
     order: 3;
     height: 40px;
   }
-  .dummy-button-container{
-    width: 50%;
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5em;
-    
-  }
-  .dummy-button{
-    min-width: 1.2em;
-    min-height: 1.2em;
-
-  }
+  
 }
-
+.dummy-button-container{
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5em;
+  
+}
+.dummy-button{
+  
+  height: 100%;
+  aspect-ratio: 1;
+}
 
 @media (min-width: 1024px) {
   .c-site-header__top {
