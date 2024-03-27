@@ -7,15 +7,15 @@ import {ColorType} from "@/components/ColorType";
 import ImageGridCard from "@/components/ImageGridCard";
 import React, {useEffect, useState, Suspense} from "react";
 import {formatHexColor, mapHitsToColorType} from "@/components/Utils";
-import {useSpinDelay} from "spin-delay";
-import {ScaleLoader} from "react-spinners";
-import CldImage from "../components/CldImage";
+
+
 import {Search}  from "@/components/ColorSearch";
 import colours_dump from "colours_dump.json"
 import {HitProps} from "@/components/ColorSearchHit";
 import GetUrlColor from "@/components/GetUrlColor";
 import PromptRecolor from "@/components/PromptOptions"; // Adjust the path as necessary
 import ChosenColorInfo from "@/components/ChosenColorInfo";
+import MainImage from "@/components/MainImage";
 
 
 export default function Home() {
@@ -60,7 +60,7 @@ export default function Home() {
     }
     setSelectedColor(selectedColor)
   }
-  const showSpinner = useSpinDelay(loading, { delay: 300, minDuration: 700 });
+  
 
   
 
@@ -108,57 +108,11 @@ export default function Home() {
                 </div>
 
                 {/*Hovedbildet */}
-                <div className="row-span-3 lg:col-span-5 lg:order-2 "style={{ aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '6px' }}>
-                    {showSpinner && (
-                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-20">
-                            <ScaleLoader
-                                color="#000000"
-                                speedMultiplier={0.5}
-                                loading={showSpinner}
-                            />
-                        </div>
-                    )}
-                    {/* The below section is dimmed until the image is loaded */}
-                    <div className={`${showSpinner ? "opacity-50" : ""} w-full h-full relative`}>
-                        {/* CldImage is documented here: https://next.cloudinary.dev/cldimage/configuration
-                        If there is an image and a selectedColor selected, transform it with Recolor */}
-                        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-10">
-                            {imageToTransform && selectedColor && (
-                                <CldImage
-                                    placeholder="empty"
-                                    onLoad={() => setLoading(false)}
-                                    width='1024'
-                                    height='1024'
-                                    src={imageToTransform}
-                                    alt="Uploaded image"
-                                    className="rounded-md"
-                                    sizes="100vw"
-                                    recolor={[`${recolorOption}`, formattedHex]}
-                                />
-                            )}
-                        </div>
-                        <div className=" flex justify-center items-center z-0">
-                            {imageToTransform &&(
-                                <CldImage
-                                    placeholder="empty"
-                                    onLoad={() => 
-                                        {if (!selectedColor) {
-                                            setLoading(false)}
-                                        }
-                                    }
-                                    width='1024'
-                                    height='1024'
-                                    src={imageToTransform}
-                                    alt="Uploaded image"
-                                    className="rounded-md"
-                                    sizes="100vw"
-                                />
-                            )}
-                        </div>
-                    </div>
+
+                <div className="lg:col-span-5 lg:row-span-3 lg:order-2 relative h-full flex items-center justify-center"style={{ aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '6px' }}>
+                    <MainImage selectedColor={selectedColor} imageToTransform={imageToTransform} loading={loading} setLoading={setLoading} recolorOption={recolorOption} formattedHex={formattedHex}/>
+
                 </div>
-
-
 
                 {/*Info om valgt farge*/}
 
