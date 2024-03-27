@@ -128,10 +128,10 @@ export default function Home() {
           </div>
 
             {/*Div-container til hovedelementene*/}
-            <div className="mobilview-grid main-container grid grid-cols-1 grid-rows-12 lg:grid-cols-11 lg:grid-rows-6 gap-y-5 lg:gap-x-4 lg:gap-y-4">
+            <div className="main-container grid grid-cols-1 grid-rows-12 lg:grid-cols-11 lg:grid-rows-6 gap-4 lg:gap-x-4 lg:gap-y-4">
 
                 {/*Bildevelger*/}
-                <div className="row-span-1 lg:col-span-3 lg:row-span-6 lg:order-1">
+                <div className="row-span-1 lg:col-span-3 lg:row-span-6 lg:order-1 relative">
                     <div className="elements-container text-left text-xl">
                         <div className="image-grid-card">
                             <p className="lg:hidden text-sm">Velg bildestil</p>
@@ -141,10 +141,10 @@ export default function Home() {
                 </div>
 
                 {/*Hovedbildet */}
-                <div className="row-span-3 lg:col-span-5 lg:row-span-5 lg:order-2 relative h-full flex items-center justify-center"style={{ aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '6px' }}>
+                <div className="row-span-2 lg:col-span-5 lg:row-span-5 lg:order-2 relative w-full h-full flex items-center justify-center"style={{ aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '6px' }}>
                     <MainImage selectedColor={selectedColor} imageToTransform={imageToTransform} loading={loading} setLoading={setLoading} recolorOption={recolorOption} formattedHex={formattedHex}/>
 
-
+3
                 </div>
 
                 {/*Info om valgt farge*/}
@@ -156,7 +156,7 @@ export default function Home() {
 
 
                 {/*Siste kolonne på desktopview*/}
-                <div className="row-span-7 lg:col-span-3 lg:row-span-6 lg:order-3 relative">
+                <div className="row-span-6 lg:col-span-3 lg:row-span-6 lg:order-3 relative">
                     <div className="w-full">
                         {/*Tabs for fargevalg*/}
                         <div
@@ -191,7 +191,7 @@ export default function Home() {
                         </div>
 
                         {/*Søkebar og Fargevelger*/}
-                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll h-full lg:h-full absolute lg:inset-0 lg:pt-7`} >
+                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll h-full lg:h-full absolute inset-0 pt-10 lg:pt-7`} >
                             <div>
                                 <Search onResultsUpdate={handleResultsUpdate}/>
 
