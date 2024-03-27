@@ -25,7 +25,7 @@ const CustomResultsComponent: React.FC<CustomResultsProps> = ({searchResults, on
 const CustomResults = connectStateResults(CustomResultsComponent);
 
 
-const searchClient = algoliasearch('NOLK3JAMLX', 'fcde24d65b04aa23920ceb878b4362d9');
+const searchClient = algoliasearch('NOLK3JAMLX', 'fcde24d65b04aa23920ceb878b4362d9'); //Search-Only API key, Lite sikkerhetsfare
 
 interface SearchProps {
     onResultsUpdate: (hits: HitProps[]) => void;
