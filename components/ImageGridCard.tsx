@@ -37,12 +37,12 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
     };
 
     return (
-        <div>
-            <div className="grid lg:grid-cols-2 grid-cols-3 gap-2 justify-start py-2">
+
+            <div className="h-full w-full grid lg:grid-cols-2 grid-cols-3 gap-2 content-between relative">
                 {images.map((src, index) => (
                     <div
                         key={index}
-                        className={`w-full rounded-lg flex items-center justify-center overflow-hidden relative border-2 ${selected === index ? 'border-black' : 'border-transparent'}  hover:border-gray-500`}
+                        className={` rounded-lg flex items-center overflow-hidden relative border-2 ${selected === index ? 'border-black' : 'border-transparent'}  hover:border-gray-500`}
                         onClick={() => handleImageClick(index)}
                     >
                         <CloudinaryWrapper
@@ -60,15 +60,16 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
                         <p></p>
                     </div>
                 )}
+                <div
+                className={`rounded-lg lg:col-span-2 col-span-3 w-full h-full content-stretch `}
+                // onClick={() => handleUploadSuccess('')} // You might need a different handler here
+                >
+                    <UploadButton onUploadSuccess={handleUploadSuccess} />
+                </div>
                 
             </div>
-            <div
-                className={`relative border-2  rounded-lg`}
-                // onClick={() => handleUploadSuccess('')} // You might need a different handler here
-            >
-                <UploadButton onUploadSuccess={handleUploadSuccess} />
-            </div>
-        </div>
+            
+
     );
 }
 
