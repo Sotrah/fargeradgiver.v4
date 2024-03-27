@@ -59,9 +59,9 @@ body {
 @media (max-width: 1023px) {
   .header-container{
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 126px;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 126px;
   }
 
   .c-site-header__top {
