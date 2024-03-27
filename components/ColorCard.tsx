@@ -20,7 +20,7 @@ const ColorCard: React.FC<ColorCardProps> = ({ colorItem, handleColorClick, sele
                 const updatedFavoriteColors: ColorType[] = [...favoriteColors]; // Create a copy of the array
                 updatedFavoriteColors.splice(indexToRemove, 1); // Remove colorItem from the copy
                 setFavoriteColors(updatedFavoriteColors); // Update state with the modified array
-            }
+              }
             return false;
         }
         else {
@@ -50,7 +50,7 @@ const ColorCard: React.FC<ColorCardProps> = ({ colorItem, handleColorClick, sele
             </button>
             {/* Rest of color card */}
             <button
-                className={`absolute inset-0 flex flex-col items-center justify-center `}
+                className={`w-full absolute inset-0 flex flex-col items-center justify-center `}
                 style={{ backgroundColor: '#F9F9F9' }}
                 onClick={() => handleColorClick(colorItem)}
                 aria-label={`Select ${colorItem.shortName} color`}
