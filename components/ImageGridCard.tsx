@@ -15,6 +15,8 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
         'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364452/qrkelyfikaa03biiaedn.jpg',
         'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364598/dc3x1mvacxdq8qc7kk80.jpg',
         'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364668/jycc1koodetkfjvdcoky.jpg',
+        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711540789/aufzdixrvc5apdvpbkbj.png',
+        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711540736/aegvqdxc0i1hbsuksdcp.png'
     ]);
     
     
@@ -27,16 +29,16 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
     // Function to handle the state update in the parent component
     const handleUploadSuccess = (result: string): void => {
         const updatedImages = images
-        updatedImages[3] = result; // Add the uploaded photo to the images array at index 3
+        updatedImages[5] = result; // Add the uploaded photo to the images array at index 5
         setImages(updatedImages);
-        setSelected(3); // uploaded photo always in same spot
+        setSelected(5); // uploaded photo always in same spot
         console.log(result);
         onPictureSelect(result); // "Feed" the selected picture url to the parent component
     };
 
     return (
         <div>
-            <div className="grid lg:grid-cols-2 grid-cols-4 gap-2 justify-start">
+            <div className="grid lg:grid-cols-2 grid-cols-3 gap-2 justify-start py-2">
                 {images.map((src, index) => (
                     <div
                         key={index}
@@ -53,6 +55,11 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
                         />
                     </div>
                 ))}
+                {images.length < 6 && (
+                    <div className="w-full rounded-lg border-dashed border-2 border-gray-400 flex items-center justify-center">
+                        <p></p>
+                    </div>
+                )}
                 
             </div>
             <div
