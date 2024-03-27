@@ -109,8 +109,10 @@ export default function Home() {
 
                 {/*Hovedbildet */}
 
+
                 <div className="lg:col-span-5 lg:row-span-3 lg:order-2 relative h-full flex items-center justify-center"style={{ aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '6px' }}>
                     <MainImage selectedColor={selectedColor} imageToTransform={imageToTransform} loading={loading} setLoading={setLoading} recolorOption={recolorOption} formattedHex={formattedHex}/>
+
 
                 </div>
 
