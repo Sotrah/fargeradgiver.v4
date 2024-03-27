@@ -17,15 +17,6 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .mobilview-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(auto-fill, minmax(50px, auto));;
-    grid-gap: 10px;
-  }
-  }
-
 /* Basisinnstillinger marger */
 .main-container {
   margin: 0.01rem;
