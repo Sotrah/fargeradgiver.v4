@@ -122,13 +122,13 @@ export default function Home() {
         <div className="main-container mx-auto px-4">
           <div className="text-center my-8">
             <h1 className="text-3xl font-bold text-gray-800">Visualiseringsverktøy</h1>
-            <p className="mt-4 text-lg text-gray-600">La deg inspirere av Jotuns fantastiske fargeunivers.
+            <p className="mt-4 text-sm lg:text-lg text-gray-600">La deg inspirere av Jotuns fantastiske fargeunivers.
                 Finn fargene som passer best til din stil og last opp bilde av rommet du vil male.
                 Etter at bildet er lastet opp kan du enkelt endre veggfargen til den fargen du ønsker.</p>
           </div>
 
             {/*Div-container til hovedelementene*/}
-            <div className="w-full h-full main-container grid grid-cols-1 grid-rows-12 lg:grid-cols-11 lg:grid-rows-6 gap-4 lg:gap-x-4 lg:gap-y-4 ">
+            <div className="w-full h-full main-container grid grid-cols-1 grid-rows-8 lg:grid-cols-11 lg:grid-rows-6 gap-4 lg:gap-x-4 lg:gap-y-4 ">
 
                 {/*Bildevelger*/}
                 <div className="row-span-2 lg:col-span-3 lg:row-span-6 lg:order-1 relative rounded-lg bg-white p-3">
@@ -141,7 +141,7 @@ export default function Home() {
                 </div>
 
                 {/*Hovedbildet  */}
-                <div className="row-span-5 lg:col-span-5 lg:row-span-5 lg:order-2 relative w-full h-full flex items-center justify-center bg-white rounded-lg p-3"style={{ aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '6px' }}>
+                <div className="row-span-2 lg:col-span-5 lg:row-span-5 lg:order-2 relative w-full h-full flex items-center justify-center bg-white rounded-lg p-3"style={{ aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '6px' }}>
                     <MainImage selectedColor={selectedColor} imageToTransform={imageToTransform} loading={loading} setLoading={setLoading} recolorOption={recolorOption} formattedHex={formattedHex}/>
 
 
@@ -149,14 +149,14 @@ export default function Home() {
 
                 {/*Info om valgt farge*/}
 
-                <div className="row-span-1 lg:col-span-5 lg:row-span-1 lg:order-5 rounded-lg bg-white ">
+                <div className="row-span-1 lg:col-span-5 lg:row-span-1 lg:order-5 rounded-lg bg-white flex justify-center items-center p-3">
                     <ChosenColorInfo selectedColor={selectedColor} formattedHex={formattedHex}/>
 
                 </div>
 
 
                 {/*Siste kolonne på desktopview*/}
-                <div className="row-span-4 lg:col-span-3 lg:row-span-6 lg:order-3 relative w-full bg-white rounded-lg p-3">
+                <div className="row-span-3 lg:col-span-3 lg:row-span-6 lg:order-3 relative w-full bg-white rounded-lg p-3 ">
                     
                         {/*Tabs for fargevalg*/}
                         <div
