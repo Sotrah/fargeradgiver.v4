@@ -5,14 +5,14 @@ import { useContext } from 'react';
 import { FavoriteColorContext } from "@/components/FavoriteColorContext";
 
 
-const FavoriteColorPicker: React.FC<{ 
-    selectedColor: ColorType | null, 
+const FavoriteColorPicker: React.FC<{
+    selectedColor: ColorType | null,
     favoriteColors: ColorType[],
     onColorSelect: (color: ColorType | null) => void }> = ({ selectedColor, onColorSelect }) => {
 
     const { favoriteColors } = useContext(FavoriteColorContext);
 
-    
+
 
     const handleColorClick = (colorItem: ColorType) => {
         if (selectedColor && selectedColor.hex === colorItem.hex) {

@@ -15,7 +15,7 @@ const RecentColorPicker: React.FC<{ selectedColor: ColorType | null, visibleModu
     const updateRecentColors = (selectedColor: ColorType) => {
         if (!recentColors.includes(selectedColor)) {
             setRecentColors((prevColors: ColorType[]) => [selectedColor, ...prevColors]);
-                console.log('Recent colors:', recentColors);
+            console.log('Recent colors:', recentColors);
         }
         // if the recent colors tab isn't open, move the selected color to the front of the recently used list
         else if (visibleModule !== 'modul3')  {

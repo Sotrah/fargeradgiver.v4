@@ -16,8 +16,8 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
         'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364598/dc3x1mvacxdq8qc7kk80.jpg',
         'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364668/jycc1koodetkfjvdcoky.jpg',
     ]);
-    
-    
+
+
     const handleImageClick = (index: number): void => {
         setSelected(index);
         console.log("Selected image: " + images[index]);
@@ -53,14 +53,14 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
                         />
                     </div>
                 ))}
-                
+
             </div>
             <div
-                    className={`relative border-2  rounded-lg`}
-                    // onClick={() => handleUploadSuccess('')} // You might need a different handler here
-                >
-                    <UploadButton onUploadSuccess={handleUploadSuccess} />
-                </div>
+                className={`relative border-2  rounded-lg`}
+                // onClick={() => handleUploadSuccess('')} // You might need a different handler here
+            >
+                <UploadButton onUploadSuccess={handleUploadSuccess} />
+            </div>
         </div>
     );
 }

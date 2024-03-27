@@ -20,7 +20,7 @@ const ColorCard: React.FC<ColorCardProps> = ({ colorItem, handleColorClick, sele
                 const updatedFavoriteColors: ColorType[] = [...favoriteColors]; // Create a copy of the array
                 updatedFavoriteColors.splice(indexToRemove, 1); // Remove colorItem from the copy
                 setFavoriteColors(updatedFavoriteColors); // Update state with the modified array
-              }
+            }
             return false;
         }
         else {
