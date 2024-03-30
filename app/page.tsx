@@ -186,7 +186,7 @@ export default function Home() {
                         </div>
 
                         {/*Søkebar og Fargevelger*/}
-                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll absolute  h-[calc(100%-3.3em)] w-[calc(100%-1.5em)] rounded-lg`} >
+                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll absolute  h-[calc(100%-3.8em)] w-[calc(100%-1.5em)] rounded-lg`} >
                             
                           <Search onResultsUpdate={handleResultsUpdate}/>
 
