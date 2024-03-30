@@ -45,7 +45,7 @@ export const Search: React.FC<SearchProps> = ({ onResultsUpdate }) => {
             <SearchBox translations={{ placeholder: 'Søk her' }}/>
                 </div>
 
-            <button onClick={toggleCollapse} className="text-sm lg:text-xs xl:text-sm border-2 bg-white hover:border-gray-500">
+            <button onClick={toggleCollapse} className="text-sm lg:text-xs xl:text-sm border-2 bg-white hover:border-gray-500 rounded-lg">
                 {isCollapsed ? 'Vis filter' : 'Gjem filter'}
             </button>
 

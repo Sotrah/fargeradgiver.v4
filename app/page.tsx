@@ -155,7 +155,7 @@ export default function Home() {
                     
                         {/*Tabs for fargevalg*/}
                         <div
-                            className="flex-grow text-center  lg:text-xs text-md flex justify-between sticky top-0 z-50 bg-jernia-nettside bg-white p-2">
+                            className="flex-grow text-center  lg:text-xs text-md flex justify-between sticky top-0 z-50 bg-jernia-nettside bg-white p-2 rounded-lg">
                             <button
                                 style={{
                                     borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
@@ -186,7 +186,7 @@ export default function Home() {
                         </div>
 
                         {/*Søkebar og Fargevelger*/}
-                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll absolute  h-[calc(100%-3.8em)] w-[calc(100%-1.5em)] rounded-lg`} >
+                        <div className={`${visibleModule === "modul2" ? "" : "hidden"} flex-grow overflow-y-scroll absolute h-[calc(100%-4.2em)] lg:h-[calc(100%-3.8em)] w-[calc(100%-1.5em)] rounded-lg pt-2`} >
                             
                           <Search onResultsUpdate={handleResultsUpdate}/>
 
