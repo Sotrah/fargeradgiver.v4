@@ -63,7 +63,7 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
             </div>
             <div
                 className={`rounded-lg flex-initial`}
-                style={{ height: '4.5em' }}
+                style={{ height: '5.25em' }}
                 >
                     <UploadButton onUploadSuccess={handleUploadSuccess} />
             </div>
