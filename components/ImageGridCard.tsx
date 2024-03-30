@@ -62,8 +62,8 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
                 )} 
             </div>
             <div
-                className={`rounded-lg flex-grow`}
-                // onClick={() => handleUploadSuccess('')} // You might need a different handler here
+                className={`rounded-lg flex-initial`}
+                style={{ height: '4.5em' }}
                 >
                     <UploadButton onUploadSuccess={handleUploadSuccess} />
             </div>
