@@ -120,7 +120,7 @@ export default function Home() {
 
         {/*Overskrift og info*/}
         <div className="main-container mx-auto px-4">
-          <div className="text-center my-8">
+          <div className="text-center lg:my-8 my-4">
             <h1 className="text-3xl font-bold text-gray-800">Visualiseringsverktøy</h1>
             <p className="mt-4 text-sm lg:text-lg text-gray-600">La deg inspirere av Jotuns fantastiske fargeunivers.
                 Finn fargene som passer best til din stil og last opp bilde av rommet du vil male.
