@@ -5,7 +5,7 @@ const UploadButton = ({ onUploadSuccess }) => {
     const [cloudinaryResult, setCloudinaryResult] = useState(null);
 
     return (
-      <div className='w-full h-12 '>
+      <div className='h-full w-full'>
         <CldUploadButton
             className='bg-blue-500 hover:bg-blue-700 text-white rounded-lg w-full h-full'
             uploadPreset="colorchangesigned"

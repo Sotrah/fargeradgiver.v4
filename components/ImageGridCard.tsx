@@ -37,8 +37,8 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
     };
 
     return (
-
-            <div className="h-full w-full grid lg:grid-cols-2 grid-cols-3 gap-2 content-between relative">
+        <div className="lg:h-full flex flex-col justify-between gap-2">
+            <div className="flex-none grid lg:grid-cols-2 grid-cols-3 gap-2 relative">
                 {images.map((src, index) => (
                     <div
                         key={index}
@@ -59,17 +59,15 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
                     <div className="w-full rounded-lg border-dashed border-2 border-gray-400 flex items-center justify-center">
                         <p></p>
                     </div>
-                )}
-                <div
-                className={`rounded-lg lg:col-span-2 col-span-3 w-full h-full content-stretch `}
+                )} 
+            </div>
+            <div
+                className={`rounded-lg flex-grow`}
                 // onClick={() => handleUploadSuccess('')} // You might need a different handler here
                 >
                     <UploadButton onUploadSuccess={handleUploadSuccess} />
-                </div>
-                
             </div>
-            
-
+        </div>    
     );
 }
 

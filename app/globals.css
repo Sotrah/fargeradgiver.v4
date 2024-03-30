@@ -17,12 +17,28 @@
   }
 }
 
-/* Basisinnstillinger marger */
-.main-container {
-  margin: 0.01rem;
+/* Grid styling stuff, big and then small */
+
+@media (min-width: 1024px) {
+  .main-grid{
+    display: grid;
+    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-rows: auto minmax(6em, auto);
+    gap: 0.75rem;
+  }
+}
+@media (max-width: 1023px) {
+  .main-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 4fr auto 5fr;
+    gap: 0.75rem;
+  }
 }
 
-/* For skjermer større enn 1292px */
+
+
+/* For skjermer større enn 1024px */
 @media (min-width: 1024px) {
   .main-container{
     margin-left: auto;
@@ -137,6 +153,7 @@ body {
     height: 72px;
   }
 }
+
 .mm-page{
   box-sizing: border-box;
   position: relative;
@@ -195,12 +212,11 @@ body {
   justify-content: center;
 }
 .colorName {
-  font-size: 12px;
+  font-size: 1em;
   font-weight: bold;
 }
 .colorCode {
-  font-size: 10px;
-  font-weight: bold;
+  font-size: 0.75em;
 }
 
 @media (min-width: 600px) {
