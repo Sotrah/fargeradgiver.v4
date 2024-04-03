@@ -7,7 +7,7 @@ const ColorPicker: React.FC<{
     onColorSelect: (color: ColorType | null) => void,
     colors?: ColorType[] } > = ({ selectedColor, onColorSelect, colors = [] }) => {
 
-    const [displayCount, setDisplayCount] = React.useState(200);
+    const [displayCount, setDisplayCount] = React.useState(201);
 
 
     const handleColorClick = (colorItem: ColorType) => {
@@ -24,7 +24,7 @@ const ColorPicker: React.FC<{
     };
 
     const handleShowMore = () => {
-        setDisplayCount(prevCount => prevCount + 200);
+        setDisplayCount(prevCount => prevCount + 201);
     };
 
     return (

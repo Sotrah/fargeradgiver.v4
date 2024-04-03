@@ -155,7 +155,7 @@ export default function Home() {
                     
                         {/*Tabs for fargevalg*/}
                         <div
-                            className="flex-grow text-center  lg:text-xs text-md flex justify-between sticky top-0 z-50 bg-jernia-nettside bg-white p-2 rounded-lg">
+                            className="flex-grow text-center  lg:text-xs text-sm flex justify-between sticky top-0 z-50 bg-jernia-nettside bg-white p-2 rounded-lg">
                             <button
                                 style={{
                                     borderBottom: visibleModule === "modul2" ? "4px solid blue" : "",
