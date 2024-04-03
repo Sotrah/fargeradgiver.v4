@@ -36,11 +36,9 @@
   }
 }
 
-
-
 /* For skjermer større enn 1024px */
 @media (min-width: 1024px) {
-  .main-container{
+  .main-container, .c-site-header__top .container {
     margin-left: auto;
     margin-right: auto;
     max-width: 1340px;
@@ -50,12 +48,15 @@
 }
 
 @media (max-width: 1023px) {
-  .main-container{
+  .main-container, .c-site-header__top .container {
     margin-left: auto;
     margin-right: auto;
     max-width: 450px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
+
 
 
 body {
@@ -80,6 +81,7 @@ body {
   z-index: 99;
   align-items: center;
 }
+
 @media (max-width: 1023px) {
   .header-container{
     display: flex;

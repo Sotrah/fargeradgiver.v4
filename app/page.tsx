@@ -82,7 +82,7 @@ export default function Home() {
           <div className="header-container">
             <div className="c-site-header__top text-white text-2xl">
               <div className="container">
-                <figure className="c-site-header__top__logo">
+                <figure className=" c-site-header__top__logo">
                   <svg id="Jernia_Logo" width="150px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 733.99 177.76">
                       <path className="cls-1" id="Name" d="M143,174.82c.19-.54,19.11-56.07,19.11-56.07h32.56a3,3,0,0,0,3-3.83l-4-16.41a2.66,2.66,0,0,0-2.45-1.92h-45.7a3,3,0,0,0-2.61,1.87L118.27,171.1c-5.79,20.16,3.61,34.07,24.09,34.07h73.56a3,3,0,0,0,3-3.83l-4-16.41a2.65,2.65,0,0,0-2.45-1.92h-64.2C145.08,183,141.25,180.07,143,174.82Z" transform="translate(-37.88 -62.06)"></path>
                       <path className="cls-1" id="Name" d="M197.75,158.13l-4-16.41a2.66,2.66,0,0,0-2.44-1.92H164.51a3,3,0,0,0-2.61,1.87l-5.64,16.56a2.66,2.66,0,0,0,2.68,3.73h35.82A2.94,2.94,0,0,0,197.75,158.13Z" transform="translate(-37.88 -62.06)"></path>
@@ -128,7 +128,7 @@ export default function Home() {
           </div>
 
             {/*Div-container til hovedelementene*/}
-            <div className="w-full h-full main-container main-grid ">
+            <div className="w-full h-full  main-grid ">
 
                 {/*Bildevelger*/}
                 <div className="lg:row-span-2 lg:order-1 relative rounded-lg bg-white p-3">
