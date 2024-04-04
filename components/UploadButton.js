@@ -26,6 +26,7 @@ const UploadButton = ({ onUploadSuccess }) => {
                 cropping: true,
                 showSkipCropButton: false,
                 croppingAspectRatio: 1.3333,
+                croppingShowBackButton: false,
                 theme: 'minimal',
                 language: "no",
                 text: {
@@ -35,8 +36,8 @@ const UploadButton = ({ onUploadSuccess }) => {
                         },
                         "crop": {
                             "title": "Beskjær",
-                            "crop_btn": "Beskjær",
-                            "skip_btn": "Hopp over",
+                            "crop_btn": "Beskjær og last opp",
+                            "skip_btn": "Last opp",
                             "reset_btn": "Tilbakestill",
                             "close_btn": "Ja",
                             "close_prompt": "Closing vil kansellere alle opplastninger, Er du sikker?",
