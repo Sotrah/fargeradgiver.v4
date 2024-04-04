@@ -9,16 +9,7 @@
 
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 /* Grid styling stuff, big and then small */
-
 @media (min-width: 1024px) {
   .main-grid{
     display: grid;
