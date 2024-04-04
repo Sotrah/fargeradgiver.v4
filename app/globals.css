@@ -269,5 +269,18 @@ body {
 
 /*Høyde på fargevelgeren*/
 .colorPickerHeight{
+}
 
+/* Info-tekst på store skjermer */
+@media (min-width:1025px) {
+  .mobile-text {
+    display: none;
+  }
+}
+
+/* Info-tekst på små skjermer */
+@media (max-width: 1024px) {
+  .desktop-text {
+    display: none;
+  }
 }
