@@ -12,11 +12,11 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
     const [selected, setSelected] = useState<number>(0);
 
     const [images, setImages] = useState<string[]>([
-        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364452/qrkelyfikaa03biiaedn.jpg',
-        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364598/dc3x1mvacxdq8qc7kk80.jpg',
-        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711364668/jycc1koodetkfjvdcoky.jpg',
-        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711540789/aufzdixrvc5apdvpbkbj.png',
-        'https://res.cloudinary.com/dj6mfsxnu/image/upload/v1711540736/aegvqdxc0i1hbsuksdcp.png'
+        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314352/qrkelyfikaa03biiaedn_od2u99.jpg',
+        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314351/dc3x1mvacxdq8qc7kk80_mxzxpo.jpg',
+        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314351/jycc1koodetkfjvdcoky_cnhibb.jpg',
+        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314351/aufzdixrvc5apdvpbkbj_chmtzg.png',
+        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314351/aegvqdxc0i1hbsuksdcp_cmm97v.png'
     ]);
 
 
