@@ -12,11 +12,11 @@ const ImageGridCard: React.FC<ImageGridCardProps> = ({ onPictureSelect }) => {
     const [selected, setSelected] = useState<number>(0);
 
     const [images, setImages] = useState<string[]>([
-        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314352/qrkelyfikaa03biiaedn_od2u99.jpg',
-        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314351/dc3x1mvacxdq8qc7kk80_mxzxpo.jpg',
-        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314351/jycc1koodetkfjvdcoky_cnhibb.jpg',
-        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314351/aufzdixrvc5apdvpbkbj_chmtzg.png',
-        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314351/aegvqdxc0i1hbsuksdcp_cmm97v.png'
+        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1713522064/jycc1koodetkfjvdcoky_cnhibb-600px_height_oyw2kz.jpg',
+        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1713522063/qrkelyfikaa03biiaedn_od2u99-600px_height_qhbttx.jpg',
+        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1713522072/aufzdixrvc5apdvpbkbj_chmtzg-600px_height_gpgnpl.png',
+        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1713522070/dc3x1mvacxdq8qc7kk80_mxzxpo-600px_height_k8i9p1.jpg',
+        'https://res.cloudinary.com/dv4ydb3qf/image/upload/v1713522067/aegvqdxc0i1hbsuksdcp_cmm97v-600px_height_zzwzas.png'
     ]);
 
 
