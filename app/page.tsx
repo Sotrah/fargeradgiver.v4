@@ -25,7 +25,7 @@ export default function Home() {
   const formattedHex = selectedColor ? formatHexColor(selectedColor.hex) : null;
   const [visibleModule, setVisibleModule] = useState("modul2");
   const [loading, setLoading] = useState(false);
-  const [imageToTransform, setImageToTransform] = useState<String | null>('https://res.cloudinary.com/dv4ydb3qf/image/upload/v1712314352/qrkelyfikaa03biiaedn_od2u99.jpg');
+  const [imageToTransform, setImageToTransform] = useState<String | null>('https://res.cloudinary.com/dv4ydb3qf/image/upload/v1713522064/jycc1koodetkfjvdcoky_cnhibb-600px_height_oyw2kz.jpg');
   const [colors, setColors] = useState<ColorType[]>([]); // Update type to ColorType[]
   const [searchResults, setSearchResults] = useState<ColorType[]>([]);
   const[colorsAreLoaded, setColorsAreLoaded] = useState(false);
